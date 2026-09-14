@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Bus Booking</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f1f5f9; color: #334155; padding: 20px; }
+    .container { max-width: 1250px; margin: auto; }
+    h1, h2 { margin-bottom: 20px; color: #0f172a; }
+    .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
+    input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+    button { background: #2563eb; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 15px; font-weight: bold; }
+    button:hover { background: #1d4ed8; }
+    .btn-danger { background: #ef4444; color: white; border: none; padding: 6px 12px; font-size: 13px; border-radius: 4px; cursor: pointer; }
+    .btn-danger:hover { background: #dc2626; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; font-size: 14px; }
+    th { background: #f8fafc; font-weight: 600; color: #475569; }
+    .img-preview { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid #2563eb; }
+    .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+    .badge-prepaid { background: #dcfce7; color: #15803d; }
+    .badge-cod { background: #fef9c3; color: #a16207; }
+    .img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
+    .img-modal img { max-width: 90%; max-height: 85vh; border-radius: 8px; }
+    .img-modal-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 30px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🚍 Bus Admin Dashboard</h1>
+
+  <div class="card">
+    <h2>Nayi Route & Trip Add Karein</h2>
+    <form id="tripForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Kahan Se (From)</label>
+          <input type="text" id="from" required placeholder="e.g. Delhi">
+        </div>
+        <div class="form-group">
+          <label>Kahan Tak (To)</label>
+          <input type="text" id="to" required placeholder="e.g. Jaipur">
+        </div>
+        <div class="form-group">
+          <label>Jaane Ki Timing (Onward Time)</label>
+          <input type="text" id="timingOnward" required placeholder="e.g. 09:00 AM">
+        </div>
+        <div class="form-group">
+          <label>Wapas Aane Ki Timing (Return Time)</label>
+          <input type="text" id="timingReturn" required placeholder="e.g. 06:00 PM">
+        </div>
+        <div class="form-group">
+          <label>Total Seats (Max 50)</label>
+          <input type="number" id="seats" min="1" max="50" value="44" required>
+        </div>
+        <div class="form-group">
+          <label>One-Way Rate (₹)</label>
+          <input type="number" id="priceOneWay" required placeholder="500">
+        </div>
+        <div class="form-group">
+          <label>Two-Way Rate (₹)</label>
+          <input type="number" id="priceTwoWay" required placeholder="900">
+        </div>
+      </div>
+      <button type="submit">Route Add Karein</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Active Routes List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Route ID</th>
+          <th>Direction</th>
+          <th>Departure Timing</th>
+          <th>Total Seats</th>
+          <th>Booked Seats</th>
+          <th>One-Way</th>
+          <th>Two-Way</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tripsTable"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Customer Bookings List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Route</th>
+          <th>Seats</th>
+          <th>Passengers</th>
+          <th>Phone</th>
+          <th>Type</th>
+          <th>Total Amount</th>
+          <th>Payment</th>
+          <th>Screenshot</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="bookingsTable"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="img-modal" id="imageModal">
+  <span class="img-modal-close" onclick="closeImgModal()">&times;</span>
+  <img id="modalImg" src="">
+</div>
+
+<script>
+  function getTrips() { return JSON.parse(localStorage.getItem('bus_trips')) || []; }
+  function saveTrips(t) { localStorage.setItem('bus_trips', JSON.stringify(t)); }
+  function getBookings() { return JSON.parse(localStorage.getItem('bus_bookings')) || []; }
+  function saveBookings(b) { localStorage.setItem('bus_bookings', JSON.stringify(b)); }
+
+  document.getElementById('tripForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const seatsVal = parseInt(document.getElementById('seats').value);
+    if(seatsVal > 50) { alert("Maximum 50 seats allow hain!"); return; }
+
+    const trips = getTrips();
+    const pairGroupId = 'PAIR_' + Date.now();
+    const fromVal = document.getElementById('from').value.trim();
+    const toVal = document.getElementById('to').value.trim();
+    const priceOne = parseFloat(document.getElementById('priceOneWay').value);
+    const priceTwo = parseFloat(document.getElementById('priceTwoWay').value);
+
+    // 1. Onward Trip (e.g. Delhi -> Jaipur)
+    const onwardTrip = {
+      id: Date.now(),
+      groupId: pairGroupId,
+      direction: 'ONWARD',
+      from: fromVal,
+      to: toVal,
+      timing: document.getElementById('timingOnward').value,
+      totalSeats: seatsVal,
+      bookedSeats: [],
+      priceOneWay: priceOne,
+      priceTwoWay: priceTwo
+    };
+
+    // 2. Return Trip (e.g. Jaipur -> Delhi)
+    const returnTrip = {
+      id: Date.now() + 1,
+      groupId: pairGroupId,
+      direction: 'RETURN',
+      from: toVal,
+      to: fromVal,
+      timing: document.getElementById('timingReturn').value,
+      totalSeats: seatsVal,
+      bookedSeats: [],
+      priceOneWay: priceOne,
+      priceTwoWay: priceTwo
+    };
+
+    trips.push(onwardTrip, returnTrip);
+    saveTrips(trips);
+    this.reset();
+    document.getElementById('seats').value = 44;
+    renderTrips();
+  });
+
+  function renderTrips() {
+    const trips = getTrips();
+    const tbody = document.getElementById('tripsTable');
+    tbody.innerHTML = trips.map(t => {
+      const bookedCount = (t.bookedSeats || []).length;
+      return `
+        <tr>
+          <td>#${t.id}</td>
+          <td><b>${t.from}</b> ➔ <b>${t.to}</b> (${t.direction})</td>
+          <td>${t.timing}</td>
+          <td>${t.totalSeats} Seats</td>
+          <td><span style="color:${bookedCount > 0 ? '#d97706':'#16a34a'}; font-weight:bold;">${bookedCount} Booked</span></td>
+          <td>₹${t.priceOneWay}</td>
+          <td>₹${t.priceTwoWay}</td>
+          <td><button class="btn-danger" onclick="deleteTrip(${t.id})">Delete</button></td>
+        </tr>
+      `;
+    }).join('') || '<tr><td colspan="8">Koi route added nahi hai.</td></tr>';
+  }
+
+  function deleteTrip(id) {
+    if(confirm('Kya aap is trip leg ko delete karna chahte hain?')) {
+      const trips = getTrips().filter(t => t.id !== id);
+      saveTrips(trips);
+      renderTrips();
+    }
+  }
+
+  function renderBookings() {
+    const bookings = getBookings();
+    const tbody = document.getElementById('bookingsTable');
+    tbody.innerHTML = bookings.map(b => `
+      <tr>
+        <td><b>#${b.id}</b></td>
+        <td><b>${b.from} ➔ ${b.to}</b><br><small>${b.timing}</small></td>
+        <td><span style="background:#e0e7ff; color:#3730a3; padding:2px 6px; border-radius:4px; font-size:12px; font-weight:bold;">${b.seatNumbers.map(s => 'Seat ' + s).join(', ')}</span></td>
+        <td>${b.passengers.map((p, i) => `<b>${i+1}.</b> ${p.name} (Seat ${p.seat})`).join('<br>')}</td>
+        <td>${b.phone}</td>
+        <td>${b.tripType === 'oneWay' ? 'One-Way' : 'Two-Way'}</td>
+        <td><b>₹${b.totalAmount}</b></td>
+        <td><span class="badge ${b.paymentMethod === 'Prepaid' ? 'badge-prepaid' : 'badge-cod'}">${b.paymentMethod}</span></td>
+        <td>
+          ${b.paymentScreenshot ? `<img src="${b.paymentScreenshot}" class="img-preview" onclick="openImgModal('${b.paymentScreenshot}')" title="Click to view">` : 'N/A'}
+        </td>
+        <td><button class="btn-danger" onclick="deleteBooking(${b.id}, ${b.tripId}, [${b.seatNumbers}], '${b.tripType}', '${b.groupId}')">Delete (Fake)</button></td>
+      </tr>
+    `).join('') || '<tr><td colspan="10">Abhi koi booking nahi aayi hai.</td></tr>';
+  }
+
+  function deleteBooking(bookingId, tripId, seatNumbers, tripType, groupId) {
+    if(confirm('Kya aap is fake booking ko delete karna chahte hain? Seats dobara free ho jayengi.')) {
+      const bookings = getBookings().filter(b => b.id !== bookingId);
+      saveBookings(bookings);
+
+      const trips = getTrips();
+      // Free seats in current trip
+      const trip = trips.find(t => t.id === tripId);
+      if(trip && trip.bookedSeats) {
+        trip.bookedSeats = trip.bookedSeats.filter(s => !seatNumbers.includes(s));
+      }
+
+      // If Two-Way, free seats in return trip as well
+      if(tripType === 'twoWay' && groupId) {
+        const returnTrip = trips.find(t => t.groupId === groupId && t.id !== tripId);
+        if(returnTrip && returnTrip.bookedSeats) {
+          returnTrip.bookedSeats = returnTrip.bookedSeats.filter(s => !seatNumbers.includes(s));
+        }
+      }
+
+      saveTrips(trips);
+      renderTrips();
+      renderBookings();
+    }
+  }
+
+  function openImgModal(src) { document.getElementById('modalImg').src = src; document.getElementById('imageModal').style.display = 'flex'; }
+  function closeImgModal() { document.getElementById('imageModal').style.display = 'none'; }
+
+  renderTrips();
+  renderBookings();
+</script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Ticket Booking</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f8fafc; padding: 20px; color: #1e293b; }
+    .container { max-width: 950px; margin: auto; }
+    h1 { text-align: center; color: #0f172a; margin-bottom: 25px; }
+    
+    .trip-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; border: 1px solid #e2e8f0; }
+    .trip-info h3 { color: #2563eb; margin-bottom: 6px; font-size: 20px; }
+    .trip-info p { font-size: 14px; color: #64748b; margin: 3px 0; }
+    .price-tag { font-size: 15px; font-weight: bold; color: #16a34a; margin-top: 5px; }
+    .btn-book { background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; }
+    .btn-book:hover { background: #1d4ed8; }
+
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; padding: 15px; z-index: 999; }
+    .modal-content { background: white; padding: 25px; border-radius: 12px; width: 100%; max-width: 750px; max-height: 92vh; overflow-y: auto; }
+    .btn-close { background: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; float: right; font-weight: bold; }
+
+    .bus-container { background: #f1f5f9; border: 2px solid #cbd5e1; border-radius: 20px; padding: 15px; margin: 15px 0; }
+    .bus-header { text-align: right; padding-bottom: 10px; border-bottom: 2px dashed #cbd5e1; margin-bottom: 15px; font-weight: bold; color: #64748b; }
+    .deck-title { text-align: center; font-weight: bold; font-size: 13px; color: #475569; margin: 10px 0 5px; background: #e2e8f0; padding: 4px; border-radius: 4px; }
+    
+    .seats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; max-width: 320px; margin-left: auto; margin-right: auto; }
+    
+    .seat { height: 42px; background: white; border: 2px solid #94a3b8; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; cursor: pointer; user-select: none; transition: 0.2s; }
+    .seat:hover:not(.booked) { border-color: #2563eb; color: #2563eb; }
+    .seat.selected { background: #2563eb; color: white; border-color: #1d4ed8; }
+    .seat.booked { background: #cbd5e1; border-color: #94a3b8; color: #64748b; cursor: not-allowed; text-decoration: line-through; }
+
+    .seat-legend { display: flex; justify-content: center; gap: 15px; font-size: 12px; margin-bottom: 15px; }
+    .legend-item { display: flex; align-items: center; gap: 5px; }
+    .legend-box { width: 16px; height: 16px; border-radius: 3px; border: 1px solid #94a3b8; }
+
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
+    input, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+    
+    .qr-box { background: #f8fafc; border: 2px dashed #2563eb; padding: 15px; text-align: center; border-radius: 8px; margin-top: 10px; display: none; }
+    .qr-img { width: 180px; height: 180px; object-fit: contain; border-radius: 8px; margin: 10px auto; border: 1px solid #ddd; }
+    
+    .btn-submit { background: #16a34a; color: white; border: none; padding: 14px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+    .btn-submit:hover { background: #15803d; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🚍 Available Bus Trips</h1>
+  <div id="tripsContainer"></div>
+</div>
+
+<div class="modal" id="bookingModal">
+  <div class="modal-content">
+    <button class="btn-close" onclick="closeModal()">✕ Close</button>
+    <h2 id="modalTitle">Select Seats</h2>
+
+    <form id="bookingForm">
+      <div class="bus-container">
+        <div class="bus-header">🚗 Driver Cabin</div>
+
+        <div class="seat-legend">
+          <div class="legend-item"><div class="legend-box" style="background:white;"></div> Available</div>
+          <div class="legend-item"><div class="legend-box" style="background:#2563eb;"></div> Selected</div>
+          <div class="legend-item"><div class="legend-box" style="background:#cbd5e1;"></div> Booked</div>
+        </div>
+
+        <div class="deck-title">LOWER DECK (Seats 1 - 22)</div>
+        <div class="seats-grid" id="lowerDeckGrid"></div>
+
+        <div class="deck-title" id="upperDeckTitle">UPPER DECK (Seats 23 - 50)</div>
+        <div class="seats-grid" id="upperDeckGrid"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Trip Type Choose Karein:</label>
+        <select id="tripType" onchange="calculateTotal()">
+          <option value="oneWay">One-Way Trip</option>
+          <option value="twoWay">Two-Way (Round Trip)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Passenger Information:</label>
+        <div id="passengerInputs">
+          <p style="font-size:13px; color:#64748b;">Kripya bus structure me se pehle seat select karein.</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Mobile Number (For Confirmation)</label>
+        <input type="tel" id="custPhone" required placeholder="10 Digit Mobile Number">
+      </div>
+
+      <div class="form-group">
+        <label>Payment Method:</label>
+        <select id="paymentMethod" onchange="togglePaymentUI()">
+          <option value="COD">Cash on Delivery (COD)</option>
+          <option value="Prepaid">Prepaid (Scan QR Code)</option>
+        </select>
+      </div>
+
+      <div class="qr-box" id="prepaidBox">
+        <p><b>Scan QR & Pay: <span id="paymentAmountText" style="color:#16a34a; font-size:18px;">₹0</span></b></p>
+        <img src="qr.jpg" alt="Payment QR Code" class="qr-img" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=BUS_BOOKING_UPI';">
+        <p style="font-size: 12px; color: #64748b;">UPI ID: <b>busbooking@upi</b></p>
+        
+        <div class="form-group" style="margin-top: 15px; text-align: left;">
+          <label>Payment Screenshot Upload Karein:</label>
+          <input type="file" id="paymentScreenshot" accept="image/*">
+        </div>
+      </div>
+
+      <div style="margin: 20px 0; font-size: 18px; font-weight: bold; text-align: right;">
+        Total Amount: <span id="totalPrice" style="color: #2563eb;">₹0</span>
+      </div>
+
+      <button type="submit" class="btn-submit">Confirm Booking</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  let selectedTrip = null;
+  let selectedSeats = [];
+
+  function getTrips() { return JSON.parse(localStorage.getItem('bus_trips')) || []; }
+  function getBookings() { return JSON.parse(localStorage.getItem('bus_bookings')) || []; }
+  function saveBookings(b) { localStorage.setItem('bus_bookings', JSON.stringify(b)); }
+  function saveTrips(t) { localStorage.setItem('bus_trips', JSON.stringify(t)); }
+
+  // Image Compressor to fix QuotaExceededError
+  function compressImage(file, callback) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        const maxSize = 600;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxSize) { height *= maxSize / width; width = maxSize; }
+        } else {
+          if (height > maxSize) { width *= maxSize / height; height = maxSize; }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        callback(canvas.toDataURL('image/jpeg', 0.6));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function renderTrips() {
+    const trips = getTrips();
+    const container = document.getElementById('tripsContainer');
+    if (trips.length === 0) {
+      container.innerHTML = '<p style="text-align:center; color:#64748b;">Abhi koi bus trip available nahi hai. Admin Dashboard se add karein.</p>';
+      return;
+    }
+
+    container.innerHTML = trips.map(t => {
+      const bookedCount = (t.bookedSeats || []).length;
+      const availableSeats = t.totalSeats - bookedCount;
+      return `
+        <div class="trip-card">
+          <div class="trip-info">
+            <h3>${t.from} ➔ ${t.to} <span style="font-size:12px; background:#e2e8f0; padding:2px 8px; border-radius:4px; color:#475569;">${t.direction || 'TRIP'}</span></h3>
+            <p>⏰ Departure Timing: <b>${t.timing}</b></p>
+            <p>💺 Available Seats: <b>${availableSeats} / ${t.totalSeats}</b></p>
+            <div class="price-tag">One-Way: ₹${t.priceOneWay} | Two-Way: ₹${t.priceTwoWay}</div>
+          </div>
+          <button class="btn-book" onclick="openBookingModal(${t.id})" ${availableSeats <= 0 ? 'disabled style="background:#94a3b8;"' : ''}>
+            ${availableSeats > 0 ? 'Select Seats' : 'Sold Out'}
+          </button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function openBookingModal(tripId) {
+    const trips = getTrips();
+    selectedTrip = trips.find(t => t.id === tripId);
+    if (!selectedTrip) return;
+
+    selectedSeats = [];
+    document.getElementById('modalTitle').innerText = `Select Seats: ${selectedTrip.from} to ${selectedTrip.to}`;
+    
+    renderBusSeats();
+    updatePassengerInputs();
+    calculateTotal();
+
+    document.getElementById('bookingModal').style.display = 'flex';
+  }
+
+  function renderBusSeats() {
+    const lowerGrid = document.getElementById('lowerDeckGrid');
+    const upperGrid = document.getElementById('upperDeckGrid');
+    const upperTitle = document.getElementById('upperDeckTitle');
+    
+    lowerGrid.innerHTML = '';
+    upperGrid.innerHTML = '';
+
+    const total = selectedTrip.totalSeats;
+    const booked = selectedTrip.bookedSeats || [];
+
+    const lowerCount = Math.min(22, total);
+    for(let i = 1; i <= lowerCount; i++) {
+      const isBooked = booked.includes(i);
+      lowerGrid.appendChild(createSeatElem(i, isBooked));
+    }
+
+    if(total > 22) {
+      upperTitle.style.display = 'block';
+      upperGrid.style.display = 'grid';
+      for(let i = 23; i <= total; i++) {
+        const isBooked = booked.includes(i);
+        upperGrid.appendChild(createSeatElem(i, isBooked));
+      }
+    } else {
+      upperTitle.style.display = 'none';
+      upperGrid.style.display = 'none';
+    }
+  }
+
+  function createSeatElem(seatNo, isBooked) {
+    const div = document.createElement('div');
+    div.className = `seat ${isBooked ? 'booked' : ''}`;
+    div.innerText = seatNo;
+
+    if(!isBooked) {
+      div.onclick = function() {
+        if(selectedSeats.includes(seatNo)) {
+          selectedSeats = selectedSeats.filter(s => s !== seatNo);
+          div.classList.remove('selected');
+        } else {
+          selectedSeats.push(seatNo);
+          div.classList.add('selected');
+        }
+        updatePassengerInputs();
+        calculateTotal();
+      };
+    }
+    return div;
+  }
+
+  function updatePassengerInputs() {
+    const container = document.getElementById('passengerInputs');
+    if(selectedSeats.length === 0) {
+      container.innerHTML = '<p style="font-size:13px; color:#64748b;">Kripya bus layout mein se kam se kam 1 seat select karein.</p>';
+      return;
+    }
+
+    container.innerHTML = selectedSeats.map(seatNo => `
+      <div style="margin-bottom:10px;">
+        <label style="font-size:12px; color:#2563eb;">Seat Number ${seatNo} Passenger Name:</label>
+        <input type="text" class="passenger-name" data-seat="${seatNo}" placeholder="Enter Name for Seat ${seatNo}" required>
+      </div>
+    `).join('');
+  }
+
+  function calculateTotal() {
+    if (!selectedTrip) return;
+    const count = selectedSeats.length;
+    const type = document.getElementById('tripType').value;
+    const rate = type === 'oneWay' ? selectedTrip.priceOneWay : selectedTrip.priceTwoWay;
+    const total = rate * count;
+    
+    document.getElementById('totalPrice').innerText = `₹${total}`;
+    document.getElementById('paymentAmountText').innerText = `₹${total}`;
+  }
+
+  function togglePaymentUI() {
+    const method = document.getElementById('paymentMethod').value;
+    document.getElementById('prepaidBox').style.display = method === 'Prepaid' ? 'block' : 'none';
+  }
+
+  function closeModal() {
+    document.getElementById('bookingModal').style.display = 'none';
+  }
+
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if(selectedSeats.length === 0) {
+      alert('Kripya kam se kam ek seat select karein!');
+      return;
+    }
+
+    const passInputs = document.querySelectorAll('.passenger-name');
+    const passengers = Array.from(passInputs).map(i => ({
+      name: i.value,
+      seat: i.getAttribute('data-seat')
+    }));
+
+    const method = document.getElementById('paymentMethod').value;
+    const screenshotInput = document.getElementById('paymentScreenshot');
+
+    if (method === 'Prepaid' && screenshotInput.files.length === 0) {
+      alert('Kripya payment ka screenshot upload karein!');
+      return;
+    }
+
+    const processBooking = (screenshotBase64 = null) => {
+      try {
+        const bookings = getBookings();
+        const trips = getTrips();
+        
+        const type = document.getElementById('tripType').value;
+        const rate = type === 'oneWay' ? selectedTrip.priceOneWay : selectedTrip.priceTwoWay;
+        const totalAmount = rate * selectedSeats.length;
+
+        // Two-Way Seat Availability Check on Return Trip
+        let returnTripObj = null;
+        if (type === 'twoWay' && selectedTrip.groupId) {
+          returnTripObj = trips.find(t => t.groupId === selectedTrip.groupId && t.id !== selectedTrip.id);
+          if (returnTripObj) {
+            const returnBooked = returnTripObj.bookedSeats || [];
+            const conflict = selectedSeats.some(s => returnBooked.includes(s));
+            if (conflict) {
+              alert('Chuni gayi seats me se kuch seats wapsi wali trip par pehle se booked hain. Kripya doosri seat chunein.');
+              return;
+            }
+          }
+        }
+
+        const newBooking = {
+          id: Math.floor(100000 + Math.random() * 900000),
+          tripId: selectedTrip.id,
+          groupId: selectedTrip.groupId,
+          from: selectedTrip.from,
+          to: selectedTrip.to,
+          timing: selectedTrip.timing,
+          seatNumbers: selectedSeats,
+          passengers: passengers,
+          phone: document.getElementById('custPhone').value,
+          tripType: type,
+          totalAmount: totalAmount,
+          paymentMethod: method,
+          paymentScreenshot: screenshotBase64
+        };
+
+        bookings.push(newBooking);
+        saveBookings(bookings);
+
+        // Update seats in selected trip
+        const tripIdx = trips.findIndex(t => t.id === selectedTrip.id);
+        if (tripIdx !== -1) {
+          if(!trips[tripIdx].bookedSeats) trips[tripIdx].bookedSeats = [];
+          trips[tripIdx].bookedSeats.push(...selectedSeats);
+        }
+
+        // If Two-Way, update seats in return trip as well
+        if (type === 'twoWay' && returnTripObj) {
+          const rIdx = trips.findIndex(t => t.id === returnTripObj.id);
+          if (rIdx !== -1) {
+            if(!trips[rIdx].bookedSeats) trips[rIdx].bookedSeats = [];
+            trips[rIdx].bookedSeats.push(...selectedSeats);
+          }
+        }
+
+        saveTrips(trips);
+
+        alert('Aapki Booking Confirm Ho Gayi Hai! Thank You.');
+        closeModal();
+        renderTrips();
+      } catch (err) {
+        alert('Error aayi hai! Kripya console check karein.');
+        console.error(err);
+      }
+    };
+
+    if (method === 'Prepaid' && screenshotInput.files[0]) {
+      compressImage(screenshotInput.files[0], function(compressedBase64) {
+        processBooking(compressedBase64);
+      });
+    } else {
+      processBooking();
+    }
+  });
+
+  renderTrips();
+</script>
+</body>
+</html>
