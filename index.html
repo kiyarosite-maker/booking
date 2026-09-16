@@ -1,317 +1,399 @@
 <!DOCTYPE html>
-<html lang="hi" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venkateswara Holidays - AC Bus Service Haridwar to Vaishno Devi</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Premium AC Bus Service: Haridwar to Mata Vaishno Devi | Venkateswara Holidays</title>
+    <meta name="description" content="Book premium luxury AC sleeper and seater buses from Haridwar to Mata Vaishno Devi (Katra). Daily departures, 100% air-conditioned, and highly rated safe travel.">
+    <meta name="keywords" content="Haridwar to Vaishno Devi bus, Katra bus service, AC Sleeper bus Haridwar, Venkateswara Holidays, luxury bus to Katra, Kashyap Samaj Ashram bus">
+    <meta name="author" content="Venkateswara Holidays">
+    <meta name="robots" content="index, follow">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Premium Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        h1, h2, h3, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Enhanced Hero Background */
         .hero-bg {
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.98)), 
+            background: linear-gradient(to bottom, rgba(3, 7, 18, 0.8), rgba(3, 7, 18, 0.95)), 
                         url('hero.jpg') center/cover no-repeat;
-            background-color: #0f172a;
+            background-color: #030712;
         }
-        .slide {
-            display: none;
+
+        /* 3D Premium Hover Effects */
+        .hover-3d {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .slide.active {
-            display: block;
+        .hover-3d:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.25);
+            border-color: rgba(245, 158, 11, 0.5);
+        }
+
+        /* 3D Button Push Effect */
+        .btn-3d {
+            box-shadow: 0 6px 0 #b45309, 0 15px 25px -5px rgba(0, 0, 0, 0.5);
+            transition: all 0.15s ease;
+        }
+        .btn-3d:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0 #b45309, 0 5px 10px -2px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide { display: none; }
+        .slide.active { display: block; animation: fade 0.8s ease-in-out; }
+        
+        @keyframes fade {
+            from { opacity: 0.4; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Premium Gold Gradient */
+        .text-gold {
+            background: linear-gradient(to right, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-900">
+<body class="bg-gray-950 text-gray-100 antialiased selection:bg-amber-500 selection:text-gray-950">
 
     <!-- Top Announcement Bar -->
-    <div class="bg-amber-500 text-slate-950 font-bold text-xs py-2 px-4 md:px-6 flex justify-between items-center flex-wrap gap-2">
+    <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-gray-950 font-bold text-xs py-2 px-4 md:px-6 flex justify-between items-center flex-wrap gap-2 shadow-md relative z-50">
         <div class="flex items-center gap-3 mx-auto md:mx-0 text-center md:text-left">
             <span><i class="fa-solid fa-location-dot mr-1"></i> Kashyap Samaj Ashram, Haridwar</span>
-            <span class="hidden sm:inline">|</span>
-            <span><i class="fa-solid fa-phone mr-1"></i> Helpline: <a href="tel:+918679195573" class="underline">+91 8679195573</a></span>
+            <span class="hidden sm:inline opacity-50">|</span>
+            <span><i class="fa-solid fa-phone mr-1"></i> Helpline: <a href="tel:+918679195573" class="hover:underline">+91 8679195573</a></span>
         </div>
-        <div class="hidden md:flex items-center gap-4 text-xs">
-            <span class="bg-slate-950/20 px-2 py-0.5 rounded"><i class="fa-solid fa-snowflake mr-1"></i> 100% Fully AC Daily Bus Service</span>
-            <a href="mailto:holidaysvenkateswara@gmail.com" class="hover:underline"><i class="fa-solid fa-envelope mr-1"></i> Email Us</a>
+        <div class="hidden md:flex items-center gap-4 text-xs font-semibold">
+            <span class="bg-gray-950/20 px-3 py-1 rounded-full"><i class="fa-solid fa-snowflake mr-1"></i> 100% Fully AC Daily Service</span>
+            <a href="mailto:holidaysvenkateswara@gmail.com" class="hover:underline flex items-center"><i class="fa-solid fa-envelope mr-1"></i> Email Us</a>
         </div>
     </div>
 
     <!-- Main Navigation Header -->
-    <nav class="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 px-4 md:px-6 py-4 shadow-xl">
+    <nav class="bg-gray-950/80 backdrop-blur-lg border-b border-gray-800 sticky top-0 z-40 px-4 md:px-6 py-4 shadow-2xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- Brand Logo -->
-            <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group">
-                <div class="bg-gradient-to-tr from-amber-600 to-amber-400 text-slate-900 p-2 sm:p-2.5 rounded-xl font-black shadow-lg shadow-amber-500/20 group-hover:scale-105 transition duration-300">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="bg-gradient-to-br from-amber-400 to-amber-600 text-gray-950 p-2 sm:p-3 rounded-xl font-black shadow-lg shadow-amber-500/20 group-hover:rotate-3 transition duration-300">
                     <i class="fa-solid fa-bus-simple text-xl sm:text-2xl"></i>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-lg sm:text-2xl font-black tracking-tight text-white leading-none">
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white leading-none brand-font">
                         VENKATESWARA
                     </span>
-                    <span class="text-[10px] sm:text-xs font-bold tracking-widest text-amber-400 uppercase">Holidays & Travels</span>
+                    <span class="text-[10px] sm:text-xs font-bold tracking-widest text-amber-400 uppercase mt-0.5">Holidays & Travels</span>
                 </div>
             </a>
 
             <!-- Desktop Nav Links -->
-            <div class="hidden lg:flex items-center gap-7 text-sm font-semibold text-slate-300">
-                <a href="#home" class="hover:text-amber-400 transition">Home</a>
-                <a href="#routes" class="hover:text-amber-400 transition">Our Route</a>
-                <a href="#fleet" class="hover:text-amber-400 transition">Our AC Buses</a>
-                <a href="#why-us" class="hover:text-amber-400 transition">Why Choose Us</a>
-                <a href="#faqs" class="hover:text-amber-400 transition">FAQs</a>
-                <a href="#contact" class="hover:text-amber-400 transition">Contact</a>
+            <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#home" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">Home</a>
+                <a href="#routes" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">Route</a>
+                <a href="#fleet" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">Our Fleet</a>
+                <a href="#why-us" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">Why Us</a>
+                <a href="#faqs" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">FAQs</a>
             </div>
 
             <!-- Header Actions -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <a href="booking.html" class="bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-black px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm transition shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5 flex items-center gap-1.5">
+            <div class="flex items-center gap-3">
+                <a href="booking.html" class="hidden sm:flex bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-gray-950 font-bold px-6 py-2.5 rounded-xl text-sm transition shadow-[0_0_15px_rgba(245,158,11,0.3)] transform hover:scale-105 items-center gap-2">
                     <i class="fa-solid fa-ticket"></i>
                     <span>Book Ticket</span>
                 </a>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="lg:hidden bg-slate-800 text-amber-400 p-2 rounded-xl border border-slate-700 text-xl focus:outline-none">
+                <button id="mobileMenuBtn" class="lg:hidden bg-gray-900 text-amber-400 p-2.5 rounded-xl border border-gray-800 text-xl focus:outline-none hover:bg-gray-800 transition">
                     <i class="fa-solid fa-bars" id="menuIcon"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Drawer Navigation -->
-        <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-800 mt-4 pt-4 pb-2 space-y-3 text-sm font-semibold text-slate-300">
-            <a href="#home" class="block px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-amber-400">Home</a>
-            <a href="#routes" class="block px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-amber-400">Our Route</a>
-            <a href="#fleet" class="block px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-amber-400">Our AC Buses</a>
-            <a href="#why-us" class="block px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-amber-400">Why Choose Us</a>
-            <a href="#faqs" class="block px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-amber-400">FAQs</a>
-            <a href="#contact" class="block px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-amber-400">Contact Us</a>
-            <a href="booking.html" class="block px-3 py-2 rounded-lg bg-amber-500 text-slate-950 font-bold"><i class="fa-solid fa-ticket mr-1.5"></i> Book Ticket</a>
-            <a href="dashboard.html" class="block px-3 py-2 rounded-lg bg-slate-800 text-amber-400 border border-slate-700"><i class="fa-solid fa-user-gear mr-1.5"></i> Admin Dashboard</a>
+        <div id="mobileMenu" class="hidden lg:hidden border-t border-gray-800 mt-4 pt-4 pb-2 space-y-2 text-sm font-medium text-gray-300">
+            <a href="#home" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Home</a>
+            <a href="#routes" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Route</a>
+            <a href="#fleet" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Our AC Buses</a>
+            <a href="#why-us" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Why Choose Us</a>
+            <a href="#faqs" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">FAQs</a>
+            <a href="#contact" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Contact Us</a>
+            <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-gray-800">
+                <a href="booking.html" class="flex justify-center items-center px-3 py-3 rounded-lg bg-amber-500 text-gray-950 font-bold"><i class="fa-solid fa-ticket mr-2"></i> Book</a>
+                <a href="dashboard.html" class="flex justify-center items-center px-3 py-3 rounded-lg bg-gray-900 text-amber-400 border border-gray-800"><i class="fa-solid fa-user-gear mr-2"></i> Admin</a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-bg min-h-[80vh] flex items-center justify-center px-4 md:px-6 py-16 md:py-24 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto text-center space-y-6 md:space-y-8 relative z-10">
-            <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs md:text-sm font-semibold uppercase tracking-widest px-4 py-2 rounded-full shadow-inner">
-                <i class="fa-solid fa-snowflake text-amber-400"></i> Daily AC Bus Services From Haridwar
+    <section id="home" class="hero-bg min-h-[85vh] flex items-center justify-center px-4 md:px-6 py-16 md:py-24 relative overflow-hidden">
+        <!-- 3D Overlay Elements -->
+        <div class="absolute top-1/4 left-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 right-10 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-5xl mx-auto text-center space-y-8 relative z-10">
+            <div class="inline-flex items-center gap-2 bg-gray-900/60 backdrop-blur-sm border border-amber-500/30 text-amber-400 text-xs md:text-sm font-semibold uppercase tracking-widest px-5 py-2.5 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.15)]">
+                <i class="fa-solid fa-snowflake text-amber-400"></i> Daily AC Bus Service
             </div>
             
-            <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight tracking-tight">
-                Haridwar Se <br class="hidden sm:inline">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-300 to-amber-500">Mata Vaishno Devi (Katra)</span>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-tight tracking-tight drop-shadow-2xl">
+                Haridwar To <br class="hidden sm:inline">
+                <span class="text-gold">Mata Vaishno Devi</span>
             </h1>
 
-            <p class="text-slate-300 text-sm md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                Kashyap Samaj Ashram Haridwar se Mata Vaishno Devi (Katra) ke suhad-dayak darshan ke liye Premium Luxury AC Sleeper & AC Seater buses ki online seat booking karein.
+            <p class="text-gray-300 text-sm md:text-lg max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-md">
+                Book your online seats for Premium Luxury AC Sleeper & AC Seater buses for a comfortable and divine journey from Kashyap Samaj Ashram, Haridwar directly to Katra.
             </p>
 
-            <!-- Book Ticket Now Redirect Button -->
-            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="booking.html" class="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg font-black text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 rounded-2xl shadow-2xl shadow-amber-500/30 hover:from-amber-300 hover:to-amber-400 transform hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-                    <span class="relative z-10 flex items-center gap-3">
-                        <i class="fa-solid fa-ticket text-xl"></i>
-                        BOOK TICKET NOW
-                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition duration-300"></i>
-                    </span>
+            <!-- Book Ticket Now Redirect Button (3D) -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-5">
+                <a href="booking.html" class="w-full sm:w-auto btn-3d inline-flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 text-base sm:text-lg font-black text-gray-950 bg-gradient-to-r from-amber-400 to-amber-500 rounded-2xl transition-all">
+                    <i class="fa-solid fa-ticket text-xl mr-3"></i>
+                    BOOK TICKET NOW
+                    <i class="fa-solid fa-arrow-right ml-3"></i>
                 </a>
 
-                <a href="tel:+918679195573" class="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg font-bold text-slate-200 border border-slate-700 hover:border-amber-400 bg-slate-900/80 hover:bg-slate-800 rounded-2xl transition duration-300">
-                    <i class="fa-solid fa-phone-volume text-amber-400 mr-2.5"></i> Call +91 8679195573
+                <a href="tel:+918679195573" class="w-full sm:w-auto inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg font-bold text-white border border-gray-700 bg-gray-900/50 backdrop-blur-md rounded-2xl hover:bg-gray-800 hover:border-amber-400 transition-all shadow-xl">
+                    <i class="fa-solid fa-phone-volume text-amber-400 mr-3"></i> Call +91 8679195573
                 </a>
             </div>
 
             <!-- Quick Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 pt-10 border-t border-slate-800/80 max-w-4xl mx-auto">
-                <div class="bg-slate-900/70 p-3 sm:p-4 rounded-xl border border-slate-800">
-                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400">Direct</h3>
-                    <p class="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium">Haridwar To Katra</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 max-w-4xl mx-auto">
+                <div class="bg-gray-900/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gray-800/80 shadow-lg hover:-translate-y-1 transition transform duration-300">
+                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400 brand-font">Direct</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider">Haridwar to Katra</p>
                 </div>
-                <div class="bg-slate-900/70 p-3 sm:p-4 rounded-xl border border-slate-800">
-                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400">100% AC</h3>
-                    <p class="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium">Fully Climate Controlled</p>
+                <div class="bg-gray-900/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gray-800/80 shadow-lg hover:-translate-y-1 transition transform duration-300">
+                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400 brand-font">100%</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider">Fully AC Coach</p>
                 </div>
-                <div class="bg-slate-900/70 p-3 sm:p-4 rounded-xl border border-slate-800">
-                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400">4.9 ★</h3>
-                    <p class="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium">Rating & Reviews</p>
+                <div class="bg-gray-900/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gray-800/80 shadow-lg hover:-translate-y-1 transition transform duration-300">
+                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400 brand-font">4.9 ★</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider">Customer Rating</p>
                 </div>
-                <div class="bg-slate-900/70 p-3 sm:p-4 rounded-xl border border-slate-800">
-                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400">Haridwar</h3>
-                    <p class="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium">Kashyap Samaj Ashram</p>
+                <div class="bg-gray-900/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gray-800/80 shadow-lg hover:-translate-y-1 transition transform duration-300">
+                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400 brand-font">Daily</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider">Guaranteed Dep.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Single Round-Trip Route Section -->
-    <section id="routes" class="py-16 md:py-20 px-4 md:px-6 max-w-4xl mx-auto">
-        <div class="text-center space-y-3 mb-10 md:mb-14">
-            <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">Official Daily Route</span>
-            <h2 class="text-2xl md:text-4xl font-black text-white">Humara Main AC Bus Route</h2>
-            <p class="text-slate-400 text-xs md:text-base max-w-xl mx-auto">Haridwar (Kashyap Samaj Ashram) se Mata Vaishno Devi (Katra) both side daily luxury service.</p>
+    <!-- Route Section -->
+    <section id="routes" class="py-20 md:py-28 px-4 md:px-6 max-w-5xl mx-auto relative">
+        <div class="text-center space-y-4 mb-14 md:mb-20">
+            <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full inline-block mb-2">Official Daily Route</span>
+            <h2 class="text-3xl md:text-5xl font-black text-white brand-font">Our Primary Journey Route</h2>
+            <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto">Operating daily luxury two-way services between Haridwar (Kashyap Samaj Ashram) and Mata Vaishno Devi (Katra).</p>
         </div>
 
-        <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-6 relative hover:border-amber-500/60 transition-all duration-300 shadow-xl">
-            <div class="flex justify-between items-start mb-6">
-                <span class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-bold px-3 py-1 rounded-full">
-                    <i class="fa-solid fa-mountain mr-1"></i> Sacred Yatra (Both Ways)
+        <div class="hover-3d bg-gray-900 border border-gray-800 rounded-3xl p-6 sm:p-10 relative shadow-2xl z-10">
+            <!-- Decorative dashed line connecting dots -->
+            <div class="absolute left-[38px] sm:left-[54px] top-[110px] sm:top-[120px] bottom-[100px] w-1 border-l-2 border-dashed border-gray-700"></div>
+
+            <div class="flex justify-between items-start mb-10">
+                <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full flex items-center">
+                    <i class="fa-solid fa-mountain-sun mr-2"></i> Sacred Yatra (Both Ways)
                 </span>
-                <span class="text-slate-400 text-xs font-semibold"><i class="fa-regular fa-clock mr-1"></i> Daily Departure</span>
+                <span class="text-gray-400 text-xs sm:text-sm font-semibold flex items-center">
+                    <i class="fa-regular fa-clock mr-2 text-amber-400"></i> Daily Schedule
+                </span>
             </div>
             
-            <div class="space-y-4 mb-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-4 h-4 rounded-full bg-emerald-400 flex items-center justify-center text-slate-900 font-bold text-[10px]">A</div>
-                    <h3 class="text-lg sm:text-xl font-bold text-white">Haridwar (Kashyap Samaj Ashram)</h3>
+            <div class="space-y-10 mb-10 relative z-10">
+                <!-- Point A -->
+                <div class="flex items-center gap-5">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-500 flex items-center justify-center text-gray-950 font-black text-sm sm:text-base shadow-[0_0_15px_rgba(245,158,11,0.5)] z-10">A</div>
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mb-1">Haridwar</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm">Departure: Kashyap Samaj Ashram</p>
+                    </div>
                 </div>
                 
-                <div class="pl-2.5 border-l-2 border-dashed border-slate-600 my-1 ml-2 py-3 text-slate-300 text-xs flex items-center gap-2">
-                    <i class="fa-solid fa-arrows-up-down text-amber-400 text-sm"></i>
-                    <span>Daily Both-Side Service (Haridwar ↔ Katra Mata Vaishno Devi)</span>
+                <!-- Middle Text -->
+                <div class="pl-[3.25rem] sm:pl-16 text-amber-400/80 text-xs sm:text-sm font-medium flex items-center gap-3 py-2">
+                    <div class="p-2 bg-gray-950 rounded-full border border-gray-800"><i class="fa-solid fa-arrows-up-down"></i></div>
+                    <span>Direct Overnight AC Service</span>
                 </div>
                 
-                <div class="flex items-center gap-3">
-                    <div class="w-4 h-4 rounded-full bg-amber-400 flex items-center justify-center text-slate-900 font-bold text-[10px]">B</div>
-                    <h3 class="text-lg sm:text-xl font-bold text-amber-400">Mata Vaishno Devi (Katra)</h3>
+                <!-- Point B -->
+                <div class="flex items-center gap-5">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-400 flex items-center justify-center text-gray-950 font-black text-sm sm:text-base shadow-[0_0_15px_rgba(52,211,153,0.4)] z-10">B</div>
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mb-1">Katra (Vaishno Devi)</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm">Arrival: Katra Main Bus Stand</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="pt-4 border-t border-slate-700/80 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-6 bg-gray-950/30 p-4 sm:p-6 rounded-2xl">
                 <div>
-                    <span class="text-xs text-slate-400 block">Bus Type Available</span>
-                    <span class="text-sm font-bold text-slate-200"><i class="fa-solid fa-snowflake text-amber-400 mr-1"></i> Luxury Volvo AC Sleeper & Seater</span>
+                    <span class="text-xs text-gray-400 block mb-1 uppercase tracking-wider font-semibold">Premium Fleet</span>
+                    <span class="text-base sm:text-lg font-bold text-gray-100 flex items-center"><i class="fa-solid fa-snowflake text-amber-400 mr-2"></i> Volvo AC Sleeper & Seater</span>
                 </div>
-                <a href="booking.html" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-lg shadow-amber-500/20 text-center flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-ticket"></i> Book AC Seat Now
+                <a href="booking.html" class="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-gray-950 font-black text-sm px-8 py-3.5 rounded-xl transition shadow-lg text-center flex items-center justify-center gap-2 transform hover:scale-105">
+                    <i class="fa-solid fa-ticket"></i> Reserve Seat
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Mobile-Friendly Bus Poster Slider Section -->
-    <section id="fleet" class="py-16 md:py-20 px-4 md:px-6 bg-slate-800/40 border-y border-slate-800">
-        <div class="max-w-xl mx-auto text-center space-y-3 mb-8">
-            <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">Comfort & Luxury</span>
-            <h2 class="text-2xl md:text-4xl font-black text-white">Our Luxury AC Bus</h2>
-            <p class="text-slate-400 text-xs md:text-sm">Haridwar se Vaishno Devi Yatra ke liye hamari fully Air-Conditioned luxury coach.</p>
+    <section id="fleet" class="py-20 md:py-28 px-4 md:px-6 bg-gray-900 border-y border-gray-800 relative shadow-inner">
+        <!-- Abstract background pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#fbbf24 1px, transparent 1px); background-size: 30px 30px;"></div>
+        
+        <div class="max-w-xl mx-auto text-center space-y-4 mb-12 relative z-10">
+            <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full inline-block">Unmatched Comfort</span>
+            <h2 class="text-3xl md:text-5xl font-black text-white brand-font">Our Luxury Fleet</h2>
+            <p class="text-gray-400 text-sm md:text-base">Experience the pinnacle of comfort with our fully air-conditioned luxury coaches for your sacred journey.</p>
         </div>
 
-        <!-- Compact Mobile-Friendly Poster Container (Fixed ~2 Inch Height Profile) -->
-        <div class="max-w-lg mx-auto bg-slate-950 border border-amber-500/40 rounded-2xl p-2 shadow-2xl relative overflow-hidden">
-            <div id="busSlider" class="relative w-full h-32 sm:h-36 rounded-xl overflow-hidden">
+        <!-- 3D Mobile-Friendly Poster Container (Crystal Clear Scaling) -->
+        <div class="max-w-2xl mx-auto bg-gray-950 border border-amber-500/30 rounded-3xl p-3 sm:p-4 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)] relative overflow-hidden transform transition hover:scale-[1.01] duration-500 z-10">
+            <div id="busSlider" class="relative w-full h-56 sm:h-80 md:h-96 rounded-2xl overflow-hidden shadow-inner bg-gray-900">
                 <!-- Slide 1 -->
-                <div class="slide active transition-opacity duration-500 w-full h-full">
-                    <img src="bus1.jpg" alt="Volvo AC Sleeper" class="w-full h-full object-cover rounded-xl">
-                    <div class="absolute bottom-2 left-2 bg-slate-900/90 border border-slate-700 text-amber-400 text-[10px] font-bold px-2 py-0.5 rounded">
-                        <i class="fa-solid fa-snowflake mr-1"></i> Volvo AC Sleeper
+                <div class="slide active w-full h-full">
+                    <img src="bus1.jpg" alt="Luxury Volvo AC Sleeper Bus" class="w-full h-full object-cover rounded-2xl transform hover:scale-105 transition duration-700">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent p-4 pt-12">
+                        <div class="inline-block bg-gray-900/90 backdrop-blur border border-gray-700 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg">
+                            <i class="fa-solid fa-bed mr-1.5"></i> Premium Volvo AC Sleeper
+                        </div>
                     </div>
                 </div>
                 <!-- Slide 2 -->
-                <div class="slide transition-opacity duration-500 w-full h-full">
-                    <img src="bus2.jpg" alt="Luxury AC Seater" class="w-full h-full object-cover rounded-xl">
-                    <div class="absolute bottom-2 left-2 bg-slate-900/90 border border-slate-700 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded">
-                        <i class="fa-solid fa-snowflake mr-1"></i> 2x2 AC Pushback
+                <div class="slide w-full h-full">
+                    <img src="bus2.jpg" alt="2x2 Luxury AC Pushback Seater Bus" class="w-full h-full object-cover rounded-2xl transform hover:scale-105 transition duration-700">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent p-4 pt-12">
+                        <div class="inline-block bg-gray-900/90 backdrop-blur border border-gray-700 text-emerald-400 text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg">
+                            <i class="fa-solid fa-chair mr-1.5"></i> 2x2 AC Pushback Seater
+                        </div>
                     </div>
                 </div>
                 <!-- Slide 3 -->
-                <div class="slide transition-opacity duration-500 w-full h-full">
-                    <img src="bus3.jpg" alt="Deluxe AC Tourer" class="w-full h-full object-cover rounded-xl">
-                    <div class="absolute bottom-2 left-2 bg-slate-900/90 border border-slate-700 text-cyan-400 text-[10px] font-bold px-2 py-0.5 rounded">
-                        <i class="fa-solid fa-snowflake mr-1"></i> AC Special Coach
+                <div class="slide w-full h-full">
+                    <img src="bus3.jpg" alt="Deluxe Special AC Coach" class="w-full h-full object-cover rounded-2xl transform hover:scale-105 transition duration-700">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent p-4 pt-12">
+                        <div class="inline-block bg-gray-900/90 backdrop-blur border border-gray-700 text-cyan-400 text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg">
+                            <i class="fa-solid fa-snowflake mr-1.5"></i> Deluxe AC Tourer Coach
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Dots Indicator -->
-            <div class="flex justify-center gap-1.5 mt-2">
-                <span class="dot w-2 h-2 rounded-full bg-amber-400 inline-block cursor-pointer"></span>
-                <span class="dot w-2 h-2 rounded-full bg-slate-700 inline-block cursor-pointer"></span>
-                <span class="dot w-2 h-2 rounded-full bg-slate-700 inline-block cursor-pointer"></span>
+            <div class="flex justify-center gap-2 mt-4 pb-2">
+                <span class="dot w-2.5 h-2.5 rounded-full bg-amber-400 inline-block cursor-pointer transition-all duration-300 shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
+                <span class="dot w-2.5 h-2.5 rounded-full bg-gray-700 inline-block cursor-pointer transition-all duration-300"></span>
+                <span class="dot w-2.5 h-2.5 rounded-full bg-gray-700 inline-block cursor-pointer transition-all duration-300"></span>
             </div>
         </div>
     </section>
 
     <!-- Why Choose Us -->
-    <section id="why-us" class="py-16 md:py-20 px-4 md:px-6">
+    <section id="why-us" class="py-20 md:py-28 px-4 md:px-6 bg-gray-950">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center space-y-3 mb-12">
-                <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">Why Venkateswara</span>
-                <h2 class="text-2xl md:text-4xl font-black text-white">Aapka Safar, Humari Zimmevari</h2>
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full inline-block">Why Venkateswara</span>
+                <h2 class="text-3xl md:text-5xl font-black text-white brand-font">Your Journey, Our Responsibility</h2>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 text-center space-y-3">
-                    <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center mx-auto text-xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Card 1 -->
+                <div class="hover-3d bg-gray-900 p-8 rounded-3xl border border-gray-800 text-center space-y-4 shadow-lg group">
+                    <div class="w-16 h-16 bg-gray-950 border border-gray-800 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-2xl group-hover:scale-110 group-hover:bg-amber-500/10 transition duration-300 shadow-inner">
                         <i class="fa-solid fa-clock"></i>
                     </div>
-                    <h3 class="font-bold text-white text-base">Punctual Departure</h3>
-                    <p class="text-xs text-slate-400">Haridwar Kashyap Samaj Ashram se samay par departure aur safe arrival.</p>
+                    <h3 class="font-bold text-white text-lg brand-font">Punctual Departures</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">On-time departure from Kashyap Samaj Ashram, Haridwar, ensuring a reliable schedule.</p>
                 </div>
-                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 text-center space-y-3">
-                    <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center mx-auto text-xl">
+                <!-- Card 2 -->
+                <div class="hover-3d bg-gray-900 p-8 rounded-3xl border border-gray-800 text-center space-y-4 shadow-lg group">
+                    <div class="w-16 h-16 bg-gray-950 border border-gray-800 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-2xl group-hover:scale-110 group-hover:bg-amber-500/10 transition duration-300 shadow-inner">
                         <i class="fa-solid fa-user-shield"></i>
                     </div>
-                    <h3 class="font-bold text-white text-base">Experienced Drivers</h3>
-                    <p class="text-xs text-slate-400">Highway & mountain routes ke expert verified drivers.</p>
+                    <h3 class="font-bold text-white text-lg brand-font">Expert Drivers</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Highly experienced and verified drivers specialized in highway and mountain terrains.</p>
                 </div>
-                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 text-center space-y-3">
-                    <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center mx-auto text-xl">
+                <!-- Card 3 -->
+                <div class="hover-3d bg-gray-900 p-8 rounded-3xl border border-gray-800 text-center space-y-4 shadow-lg group">
+                    <div class="w-16 h-16 bg-gray-950 border border-gray-800 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-2xl group-hover:scale-110 group-hover:bg-amber-500/10 transition duration-300 shadow-inner">
                         <i class="fa-solid fa-snowflake"></i>
                     </div>
-                    <h3 class="font-bold text-white text-base">100% AC Comfort</h3>
-                    <p class="text-xs text-slate-400">Saaf-suthri seats, clean blankets aur high-performance AC cooling.</p>
+                    <h3 class="font-bold text-white text-lg brand-font">Premium Comfort</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Hygienic seating, clean blankets, and high-performance climate control cooling.</p>
                 </div>
-                <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 text-center space-y-3">
-                    <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center mx-auto text-xl">
+                <!-- Card 4 -->
+                <div class="hover-3d bg-gray-900 p-8 rounded-3xl border border-gray-800 text-center space-y-4 shadow-lg group">
+                    <div class="w-16 h-16 bg-gray-950 border border-gray-800 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-2xl group-hover:scale-110 group-hover:bg-amber-500/10 transition duration-300 shadow-inner">
                         <i class="fa-solid fa-headset"></i>
                     </div>
-                    <h3 class="font-bold text-white text-base">24x7 Helpdesk</h3>
-                    <p class="text-xs text-slate-400">Haridwar Kashyap Samaj Ashram counter se direct assistance.</p>
+                    <h3 class="font-bold text-white text-lg brand-font">24/7 Assistance</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Direct in-person and on-call assistance available from our Haridwar counter.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQs -->
-    <section id="faqs" class="py-16 md:py-20 px-4 md:px-6 max-w-4xl mx-auto">
-        <div class="text-center space-y-3 mb-10">
-            <h2 class="text-2xl md:text-4xl font-black text-white">Frequently Asked Questions</h2>
+    <section id="faqs" class="py-20 md:py-28 px-4 md:px-6 max-w-4xl mx-auto">
+        <div class="text-center space-y-4 mb-12">
+            <h2 class="text-3xl md:text-5xl font-black text-white brand-font">Frequently Asked Questions</h2>
         </div>
-        <div class="space-y-4 text-xs sm:text-sm">
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700">
-                <h3 class="font-bold text-white text-base mb-1.5"><i class="fa-solid fa-circle-question text-amber-400 mr-2"></i> Bus kahan se chalegi?</h3>
-                <p class="text-slate-400 leading-relaxed">Venkateswara Holidays ki sabhi **100% AC buses** **Kashyap Samaj Ashram, Haridwar** se depart hoti hain.</p>
+        <div class="space-y-5 text-sm sm:text-base">
+            <div class="hover-3d bg-gray-900 p-6 sm:p-8 rounded-2xl border border-gray-800 shadow-md">
+                <h3 class="font-bold text-white text-lg mb-2 flex items-center"><i class="fa-solid fa-circle-question text-amber-400 mr-3 text-xl"></i> Where does the bus depart from?</h3>
+                <p class="text-gray-400 leading-relaxed pl-8">All <strong>100% AC buses</strong> operated by Venkateswara Holidays depart directly from <strong>Kashyap Samaj Ashram, Haridwar</strong>.</p>
             </div>
-            <div class="bg-slate-800 p-5 rounded-xl border border-slate-700">
-                <h3 class="font-bold text-white text-base mb-1.5"><i class="fa-solid fa-circle-question text-amber-400 mr-2"></i> Online seat booking kaise karein?</h3>
-                <p class="text-slate-400 leading-relaxed">Website par <strong>"Book Ticket"</strong> ya <strong>"Book AC Seat"</strong> button par click karke aap direct <code class="text-amber-400 bg-slate-900 px-1 py-0.5 rounded">booking.html</code> page par redirected ho jayenge aur apni seat book kar sakte hain.</p>
+            <div class="hover-3d bg-gray-900 p-6 sm:p-8 rounded-2xl border border-gray-800 shadow-md">
+                <h3 class="font-bold text-white text-lg mb-2 flex items-center"><i class="fa-solid fa-circle-question text-amber-400 mr-3 text-xl"></i> How can I book my seat online?</h3>
+                <p class="text-gray-400 leading-relaxed pl-8">Simply click on the <strong>"Book Ticket"</strong> button anywhere on this website. You will be securely redirected to our booking portal to reserve your preferred seats instantly.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-slate-950 border-t border-slate-800 text-slate-400 text-xs py-12 px-4 md:px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div class="space-y-3">
-                <span class="text-lg font-black text-white">VENKATESWARA HOLIDAYS</span>
-                <p class="text-slate-400 text-xs">Haridwar (Kashyap Samaj Ashram) se Mata Vaishno Devi (Katra) ke liye daily premium luxury AC bus service.</p>
+    <footer id="contact" class="bg-gray-950 border-t border-gray-900 text-gray-400 py-16 px-4 md:px-6 relative overflow-hidden">
+        <!-- Footer glowing accent -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 relative z-10">
+            <div class="space-y-4">
+                <span class="text-2xl font-black text-white brand-font tracking-wide">VENKATESWARA <br/><span class="text-amber-400 text-sm tracking-widest font-sans uppercase">Holidays</span></span>
+                <p class="text-gray-400 text-sm leading-relaxed mt-4">Providing premium luxury AC bus services daily from Haridwar (Kashyap Samaj Ashram) to Mata Vaishno Devi (Katra).</p>
             </div>
-            <div class="space-y-2">
-                <h4 class="font-bold text-white text-sm">Quick Links</h4>
-                <ul class="space-y-1.5">
-                    <li><a href="booking.html" class="hover:text-amber-400"><i class="fa-solid fa-ticket text-amber-400 mr-1"></i> Book AC Bus Ticket</a></li>
-                    <li><a href="#routes" class="hover:text-amber-400">Haridwar to Katra Route</a></li>
-                    <li><a href="dashboard.html" class="hover:text-amber-400">Admin Login</a></li>
+            <div class="space-y-4">
+                <h4 class="font-bold text-white text-lg brand-font border-b border-gray-800 pb-2 inline-block">Quick Links</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="booking.html" class="hover:text-amber-400 transition flex items-center"><i class="fa-solid fa-chevron-right text-amber-500/50 mr-2 text-xs"></i> Book AC Ticket</a></li>
+                    <li><a href="#routes" class="hover:text-amber-400 transition flex items-center"><i class="fa-solid fa-chevron-right text-amber-500/50 mr-2 text-xs"></i> Haridwar to Katra Route</a></li>
+                    <li><a href="dashboard.html" class="hover:text-amber-400 transition flex items-center"><i class="fa-solid fa-chevron-right text-amber-500/50 mr-2 text-xs"></i> Admin Portal</a></li>
                 </ul>
             </div>
-            <div class="space-y-2">
-                <h4 class="font-bold text-white text-sm">Haridwar Office Contact</h4>
-                <p><i class="fa-solid fa-location-dot text-amber-400 mr-1.5"></i> Kashyap Samaj Ashram, Haridwar</p>
-                <p><i class="fa-solid fa-phone text-amber-400 mr-1.5"></i> +91 8679195573</p>
-                <p><i class="fa-solid fa-envelope text-amber-400 mr-1.5"></i> holidaysvenkateswara@gmail.com</p>
+            <div class="space-y-4">
+                <h4 class="font-bold text-white text-lg brand-font border-b border-gray-800 pb-2 inline-block">Haridwar Office</h4>
+                <div class="space-y-3 text-sm">
+                    <p class="flex items-start"><i class="fa-solid fa-location-dot text-amber-400 mr-3 mt-1"></i> Kashyap Samaj Ashram,<br>Haridwar, Uttarakhand</p>
+                    <p class="flex items-center"><i class="fa-solid fa-phone text-amber-400 mr-3"></i> <a href="tel:+918679195573" class="hover:text-amber-400 transition">+91 8679195573</a></p>
+                    <p class="flex items-center"><i class="fa-solid fa-envelope text-amber-400 mr-3"></i> <a href="mailto:holidaysvenkateswara@gmail.com" class="hover:text-amber-400 transition break-all">holidaysvenkateswara@gmail.com</a></p>
+                </div>
             </div>
         </div>
-        <div class="text-center pt-6 border-t border-slate-900 text-slate-600">
+        <div class="text-center pt-8 border-t border-gray-900 text-gray-600 text-sm font-medium relative z-10">
             © 2026 Venkateswara Holidays. All rights reserved.
         </div>
     </footer>
@@ -334,6 +416,15 @@
             }
         });
 
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
         // Bus Image Poster Slider Logic
         let slideIndex = 0;
         const slides = document.querySelectorAll('.slide');
@@ -342,10 +433,12 @@
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.classList.remove('active');
-                dots[i].classList.replace('bg-amber-400', 'bg-slate-700');
+                dots[i].classList.remove('bg-amber-400', 'shadow-[0_0_8px_rgba(245,158,11,0.8)]');
+                dots[i].classList.add('bg-gray-700');
             });
             slides[index].classList.add('active');
-            dots[index].classList.replace('bg-slate-700', 'bg-amber-400');
+            dots[index].classList.remove('bg-gray-700');
+            dots[index].classList.add('bg-amber-400', 'shadow-[0_0_8px_rgba(245,158,11,0.8)]');
         }
 
         function autoSlide() {
@@ -353,14 +446,14 @@
             showSlide(slideIndex);
         }
 
-        let slideInterval = setInterval(autoSlide, 3500);
+        let slideInterval = setInterval(autoSlide, 4000); // Slightly slower for a more premium feel
 
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
                 clearInterval(slideInterval);
                 slideIndex = index;
                 showSlide(slideIndex);
-                slideInterval = setInterval(autoSlide, 3500);
+                slideInterval = setInterval(autoSlide, 4000);
             });
         });
     </script>
