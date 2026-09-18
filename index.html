@@ -1,661 +1,462 @@
+
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vaishno Devi Express | Luxury Sleeper Bus Booking</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #f8fafc; }
-    .date-scroll::-webkit-scrollbar { height: 6px; }
-    .date-scroll::-webkit-scrollbar-track { background: #1e293b; border-radius: 10px; }
-    .date-scroll::-webkit-scrollbar-thumb { background: #d97706; border-radius: 10px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    .sleeper-seat {
-      width: 55px; height: 95px; border-radius: 10px; cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: space-between; padding: 8px 4px;
-      font-size: 0.75rem; font-weight: 700; border: 2px solid transparent; user-select: none;
-    }
-    .sleeper-pillow {
-      width: 80%; height: 12px; border-radius: 4px; opacity: 0.6; background: rgba(255, 255, 255, 0.4);
-    }
-    .available { background-color: #2563eb; color: white; border-color: #3b82f6; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3); }
-    .available:hover { transform: translateY(-3px) scale(1.03); background-color: #1d4ed8; }
-    .selected { background-color: #16a34a; color: white; border-color: #22c55e; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.5); transform: scale(1.05); }
-    .booked { background-color: #dc2626; color: white; border-color: #ef4444; opacity: 0.85; cursor: not-allowed; box-shadow: none; }
-    .bus-container {
-      background: linear-gradient(145deg, #1e293b, #0f172a);
-      border: 2px solid #334155; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    }
-  </style>
+    <!-- SEO Meta Tags -->
+    <title>Premium AC Bus Service: Haridwar to Mata Vaishno Devi | Venkateswara Holidays</title>
+    <meta name="description" content="Book premium luxury AC sleeper and seater buses from Haridwar to Mata Vaishno Devi (Katra). Daily departures, 100% air-conditioned, and highly rated safe travel.">
+    <meta name="keywords" content="Haridwar to Vaishno Devi bus, Katra bus service, AC Sleeper bus Haridwar, Venkateswara Holidays, luxury bus to Katra, Kashyap Samaj Ashram bus">
+    <meta name="author" content="Venkateswara Holidays">
+    <meta name="robots" content="index, follow">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Premium Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        h1, h2, h3, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Enhanced Hero Background */
+        .hero-bg {
+            background: linear-gradient(to bottom, rgba(3, 7, 18, 0.8), rgba(3, 7, 18, 0.95)), 
+                        url('hero.jpg') center/cover no-repeat;
+            background-color: #030712;
+        }
+
+        /* 3D Premium Hover Effects */
+        .hover-3d {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hover-3d:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.25);
+            border-color: rgba(245, 158, 11, 0.5);
+        }
+
+        /* 3D Button Push Effect */
+        .btn-3d {
+            box-shadow: 0 6px 0 #b45309, 0 15px 25px -5px rgba(0, 0, 0, 0.5);
+            transition: all 0.15s ease;
+        }
+        .btn-3d:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0 #b45309, 0 5px 10px -2px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide { display: none; }
+        .slide.active { display: block; animation: fade 0.8s ease-in-out; }
+        
+        @keyframes fade {
+            from { opacity: 0.4; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Premium Gold Gradient */
+        .text-gold {
+            background: linear-gradient(to right, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="bg-gray-950 text-gray-100 antialiased selection:bg-amber-500 selection:text-gray-950">
 
-  <!-- Header -->
-  <header class="bg-gradient-to-r from-red-900 via-red-700 to-amber-700 shadow-2xl border-b border-amber-500/30">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-      <div class="flex items-center gap-3">
-        <div class="bg-amber-400 text-red-950 p-3 rounded-2xl shadow-lg">
-          <i class="fa-solid fa-bus-simple text-2xl"></i>
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 text-gray-950 font-bold text-xs py-2 px-4 md:px-6 flex justify-between items-center flex-wrap gap-2 shadow-md relative z-50">
+        <div class="flex items-center gap-3 mx-auto md:mx-0 text-center md:text-left">
+            <span><i class="fa-solid fa-location-dot mr-1"></i> Kashyap Samaj Ashram, Haridwar</span>
+            <span class="hidden sm:inline opacity-50">|</span>
+            <span><i class="fa-solid fa-phone mr-1"></i> Helpline: <a href="tel:+918679195573" class="hover:underline">+91 8679195573</a></span>
         </div>
-        <div>
-          <h1 class="text-2xl md:text-3xl font-extrabold tracking-wide text-white drop-shadow-md">
-            MAA VAISHNO EXPRESS
-          </h1>
-          <p class="text-xs text-amber-200 font-medium">Premium AC Multi-Axle Sleeper</p>
+        <div class="hidden md:flex items-center gap-4 text-xs font-semibold">
+            <span class="bg-gray-950/20 px-3 py-1 rounded-full"><i class="fa-solid fa-snowflake mr-1"></i> 100% Fully AC Daily Service</span>
+            <a href="mailto:holidaysvenkateswara@gmail.com" class="hover:underline flex items-center"><i class="fa-solid fa-envelope mr-1"></i> Email Us</a>
         </div>
-      </div>
-      
-      <div id="header-route" class="flex items-center gap-3 bg-black/40 px-5 py-2.5 rounded-full border border-amber-400/30">
-        <span class="text-amber-300 font-semibold text-sm"><i class="fa-solid fa-location-dot text-red-400 mr-1"></i> Haridwar</span>
-        <i class="fa-solid fa-arrow-right-long text-amber-400"></i>
-        <span class="text-amber-300 font-semibold text-sm"><i class="fa-solid fa-location-dot text-green-400 mr-1"></i> Katra (Vaishno Devi)</span>
-      </div>
-    </div>
-  </header>
-
-  <!-- Trip Selection -->
-  <section class="bg-slate-800 py-3 border-b border-slate-700">
-    <div class="max-w-7xl mx-auto px-4 flex flex-wrap gap-4 items-center justify-center md:justify-start">
-      <span class="text-sm font-bold text-slate-300 mr-2"><i class="fa-solid fa-route text-amber-400 mr-1"></i> Trip Type:</span>
-      <label class="flex items-center gap-2 cursor-pointer bg-slate-900 px-4 py-2 rounded-lg border border-slate-600 hover:border-amber-500 transition">
-        <input type="radio" name="journey_type" value="forward" checked onchange="changeJourneyType()" class="accent-amber-500 w-4 h-4">
-        <span class="text-sm font-semibold">One Way (Haridwar to Katra)</span>
-      </label>
-      <label class="flex items-center gap-2 cursor-pointer bg-slate-900 px-4 py-2 rounded-lg border border-slate-600 hover:border-amber-500 transition">
-        <input type="radio" name="journey_type" value="return" onchange="changeJourneyType()" class="accent-amber-500 w-4 h-4">
-        <span class="text-sm font-semibold text-green-400">Return Only (Katra to Haridwar)</span>
-      </label>
-      <label class="flex items-center gap-2 cursor-pointer bg-slate-900 px-4 py-2 rounded-lg border border-amber-500 bg-amber-900/20 transition">
-        <input type="radio" name="journey_type" value="twoway" onchange="changeJourneyType()" class="accent-amber-500 w-4 h-4">
-        <span class="text-sm font-semibold text-amber-400">Two Way (Round Trip)</span>
-      </label>
-    </div>
-  </section>
-
-  <!-- Date Selection -->
-  <section class="bg-slate-900/90 py-4 border-b border-slate-800 backdrop-blur-md sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-2 gap-3">
-        <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider"><i class="fa-regular fa-calendar-days mr-1"></i> Select Journey Date</span>
-        <div id="return-date-container" class="hidden flex items-center gap-2 bg-slate-800 p-1.5 rounded-lg border border-amber-500/50">
-          <span class="text-xs font-bold text-amber-400 pl-2">Return Date:</span>
-          <input type="date" id="return-date-input" onchange="fetchSeats()" class="bg-slate-900 text-white text-xs border border-slate-600 rounded p-1 outline-none focus:border-amber-500">
-        </div>
-        <span id="selected-date-label" class="text-xs text-slate-300 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">Loading...</span>
-      </div>
-      <div id="date-strip" class="date-scroll flex gap-3 overflow-x-auto pb-2 pt-1"></div>
-    </div>
-  </section>
-
-  <!-- Main Booking Container -->
-  <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow">
-    <div class="bg-slate-800/80 p-4 rounded-2xl mb-8 border border-slate-700/60 flex flex-wrap justify-around items-center gap-4 text-xs font-medium">
-      <div class="flex items-center gap-2"><div class="w-5 h-5 rounded-md available shadow"></div> Available</div>
-      <div class="flex items-center gap-2"><div class="w-5 h-5 rounded-md selected shadow"></div> Selected</div>
-      <div class="flex items-center gap-2"><div class="w-5 h-5 rounded-md booked shadow"></div> Booked</div>
-      <div class="text-amber-400 font-bold border-l border-slate-700 pl-4">
-        <i class="fa-solid fa-indian-rupee-sign"></i> <span id="display-price-label">Loading price...</span>
-      </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <div class="lg:col-span-7 flex flex-col gap-8">
-        <div class="bus-container p-6 relative">
-          <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-700">
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">FRONT OF BUS</span>
-            <div class="w-10 h-10 rounded-full border-2 border-amber-500/60 flex items-center justify-center text-amber-400 bg-slate-800">
-              <i class="fa-solid fa-steering-wheel text-lg"></i>
-            </div>
-          </div>
-          <div class="flex gap-4 mb-6">
-            <button id="tab-lower" onclick="switchDeck('lower')" class="flex-1 py-2.5 rounded-xl font-semibold text-sm transition-all bg-amber-500 text-slate-950 shadow-lg">Lower Deck</button>
-            <button id="tab-upper" onclick="switchDeck('upper')" class="flex-1 py-2.5 rounded-xl font-semibold text-sm transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">Upper Deck</button>
-          </div>
-          <div id="lower-deck-grid" class="space-y-4"></div>
-          <div id="upper-deck-grid" class="space-y-4 hidden"></div>
-        </div>
-      </div>
-
-      <div class="lg:col-span-5">
-        <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700/80 shadow-2xl sticky top-28">
-          <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-amber-400 border-b border-slate-700 pb-3">
-            <i class="fa-solid fa-ticket"></i> Passenger Details
-          </h2>
-          
-          <div id="empty-selection-msg" class="text-center py-10 text-slate-400">
-            <i class="fa-solid fa-chair text-4xl mb-3 text-slate-600 block"></i>
-            <p class="text-sm">Please select seats to proceed.</p>
-          </div>
-
-          <form id="booking-form" class="hidden space-y-4">
-            <div class="space-y-3">
-              <div>
-                <label class="block text-xs text-slate-300 mb-1 font-medium">Customer Name</label>
-                <input type="text" id="cust-name" required placeholder="Enter full name" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-amber-500 outline-none">
-              </div>
-              <div class="grid grid-cols-2 gap-3">
-                <div>
-                  <label class="block text-xs text-slate-300 mb-1 font-medium">Mobile Number</label>
-                  <input type="tel" id="cust-phone" required pattern="[0-9]{10}" placeholder="10-digit number" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-amber-500 outline-none">
+    <!-- Main Navigation Header -->
+    <nav class="bg-gray-950/80 backdrop-blur-lg border-b border-gray-800 sticky top-0 z-40 px-4 md:px-6 py-4 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="bg-gradient-to-br from-amber-400 to-amber-600 text-gray-950 p-2 sm:p-3 rounded-xl font-black shadow-lg shadow-amber-500/20 group-hover:rotate-3 transition duration-300">
+                    <i class="fa-solid fa-bus-simple text-xl sm:text-2xl"></i>
                 </div>
-                <div>
-                  <label class="block text-xs text-slate-300 mb-1 font-medium">City</label>
-                  <input type="text" id="cust-address" required placeholder="City Name" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-amber-500 outline-none">
+                <div class="flex flex-col">
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white leading-none brand-font">
+                        VENKATESWARA
+                    </span>
+                    <span class="text-[10px] sm:text-xs font-bold tracking-widest text-amber-400 uppercase mt-0.5">Holidays & Travels</span>
                 </div>
-              </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#home" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">Home</a>
+                <a href="#routes" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">Route</a>
+                <a href="#fleet" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">Our Fleet</a>
+                <a href="#why-us" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">Why Us</a>
+                <a href="#faqs" class="hover:text-amber-400 transition hover:-translate-y-0.5 transform inline-block">FAQs</a>
             </div>
 
-            <div class="pt-2">
-              <h3 class="text-xs uppercase font-bold text-amber-400 tracking-wider mb-2">
-                Passengers (<span id="passenger-count">0</span> Seat)
-              </h3>
-              <div id="dynamic-passengers-container" class="space-y-3 max-h-60 overflow-y-auto pr-1"></div>
-            </div>
+            <!-- Header Actions -->
+            <div class="flex items-center gap-3">
+                <a href="booking.html" class="hidden sm:flex bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-gray-950 font-bold px-6 py-2.5 rounded-xl text-sm transition shadow-[0_0_15px_rgba(245,158,11,0.3)] transform hover:scale-105 items-center gap-2">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>Book Ticket</span>
+                </a>
 
-            <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2 text-sm">
-              <div class="flex justify-between text-slate-400">
-                <span>Journey:</span>
-                <span id="summary-journey" class="text-white font-bold">One Way</span>
-              </div>
-              <div class="flex justify-between text-slate-400">
-                <span>Seats:</span>
-                <span id="summary-seats" class="text-amber-300 font-bold">None</span>
-              </div>
-              <div class="flex justify-between text-slate-400">
-                <span>Payment Mode:</span>
-                <span class="text-green-400 font-bold">Cash on Delivery (COD)</span>
-              </div>
-              <div class="flex justify-between text-lg font-bold text-white border-t border-slate-800 pt-2">
-                <span>Total Fare:</span>
-                <span class="text-amber-400">₹ <span id="summary-total">0</span></span>
-              </div>
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden bg-gray-900 text-amber-400 p-2.5 rounded-xl border border-gray-800 text-xl focus:outline-none hover:bg-gray-800 transition">
+                    <i class="fa-solid fa-bars" id="menuIcon"></i>
+                </button>
             </div>
-
-            <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold py-3.5 px-4 rounded-xl shadow-xl transition-all flex justify-center items-center gap-2">
-              <i class="fa-solid fa-hand-holding-dollar"></i> Book Now (Pay on Bus)
-            </button>
-          </form>
         </div>
-      </div>
-    </div>
-  </main>
 
-  <!-- Ticket Modal -->
-  <div id="ticket-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
-    <div class="bg-slate-800 rounded-2xl max-w-md w-full p-6 border border-amber-500/40 shadow-2xl relative text-center">
-      <div class="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
-        <i class="fa-solid fa-circle-check"></i>
-      </div>
-      <h3 class="text-2xl font-bold text-white">Booking Confirmed!</h3>
-      <p class="text-xs text-amber-400 font-bold mt-1 mb-4">Payment Method: Cash on Delivery (COD)</p>
-      
-      <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-left text-xs space-y-2 mb-6">
-        <div class="flex justify-between text-slate-400"><span>Booking ID:</span><span id="ticket-id" class="text-amber-400 font-bold"></span></div>
-        <div class="flex justify-between text-slate-400"><span>Trip Type:</span><span id="ticket-type" class="text-white font-semibold"></span></div>
-        <div class="flex justify-between text-slate-400"><span>Date:</span><span id="ticket-date" class="text-white font-semibold"></span></div>
-        <div class="flex justify-between text-slate-400"><span>Name:</span><span id="ticket-name" class="text-white font-semibold"></span></div>
-        <div class="flex justify-between text-slate-400"><span>Seats:</span><span id="ticket-seats" class="text-green-400 font-bold"></span></div>
-        <div class="flex justify-between text-slate-400 border-t border-slate-800 pt-2 text-sm">
-          <span>Amount to Pay (COD):</span><span id="ticket-amount" class="text-amber-400 font-bold"></span>
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobileMenu" class="hidden lg:hidden border-t border-gray-800 mt-4 pt-4 pb-2 space-y-2 text-sm font-medium text-gray-300">
+            <a href="#home" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Home</a>
+            <a href="#routes" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Route</a>
+            <a href="#fleet" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Our AC Buses</a>
+            <a href="#why-us" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Why Choose Us</a>
+            <a href="#faqs" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">FAQs</a>
+            <a href="#contact" class="block px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-amber-400 transition">Contact Us</a>
+            <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-gray-800">
+                <a href="booking.html" class="flex justify-center items-center px-3 py-3 rounded-lg bg-amber-500 text-gray-950 font-bold"><i class="fa-solid fa-ticket mr-2"></i> Book</a>
+                <a href="dashboard.html" class="flex justify-center items-center px-3 py-3 rounded-lg bg-gray-900 text-amber-400 border border-gray-800"><i class="fa-solid fa-user-gear mr-2"></i> Admin</a>
+            </div>
         </div>
-      </div>
-      <button onclick="closeModal()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl hover:bg-amber-400 transition">
-        Done
-      </button>
-    </div>
-  </div>
+    </nav>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, onValue, update, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-[85vh] flex items-center justify-center px-4 md:px-6 py-16 md:py-24 relative overflow-hidden">
+        <!-- 3D Overlay Elements -->
+        <div class="absolute top-1/4 left-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 right-10 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl"></div>
 
-    const firebaseConfig = {
-      apiKey: "AlzaSyAABvh6xwaH4J3RJLOCg_IFggfBLZDgICE",
-      authDomain: "buss-c821b.firebaseapp.com",
-      databaseURL: "https://buss-c821b-default-rtdb.firebaseio.com",
-      projectId: "buss-c821b",
-      storageBucket: "buss-c821b.firebasestorage.app",
-      messagingSenderId: "420408813048",
-      appId: "1:420408813048:web:d64ce1241ab24608dde20d"
-    };
+        <div class="max-w-5xl mx-auto text-center space-y-8 relative z-10">
+            <div class="inline-flex items-center gap-2 bg-gray-900/60 backdrop-blur-sm border border-amber-500/30 text-amber-400 text-xs md:text-sm font-semibold uppercase tracking-widest px-5 py-2.5 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.15)]">
+                <i class="fa-solid fa-snowflake text-amber-400"></i> Daily AC Bus Service
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-tight tracking-tight drop-shadow-2xl">
+                Haridwar To <br class="hidden sm:inline">
+                <span class="text-gold">Mata Vaishno Devi</span>
+            </h1>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+            <p class="text-gray-300 text-sm md:text-lg max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-md">
+                Book your online seats for Premium Luxury AC Sleeper & AC Seater buses for a comfortable and divine journey from Kashyap Samaj Ashram, Haridwar directly to Katra.
+            </p>
 
-    let selectedDate = "";
-    let selectedSeats = [];
-    let currentSeatsData = {};
-    
-    let unsubFwd = null;
-    let unsubRet = null;
+            <!-- Book Ticket Now Redirect Button (3D) -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-5">
+                <a href="booking.html" class="w-full sm:w-auto btn-3d inline-flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 text-base sm:text-lg font-black text-gray-950 bg-gradient-to-r from-amber-400 to-amber-500 rounded-2xl transition-all">
+                    <i class="fa-solid fa-ticket text-xl mr-3"></i>
+                    BOOK TICKET NOW
+                    <i class="fa-solid fa-arrow-right ml-3"></i>
+                </a>
 
-    let ticketPrices = {
-      oneWay: 1299,
-      returnWay: 1299,
-      twoWay: 2500
-    };
+                <a href="tel:+918679195573" class="w-full sm:w-auto inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg font-bold text-white border border-gray-700 bg-gray-900/50 backdrop-blur-md rounded-2xl hover:bg-gray-800 hover:border-amber-400 transition-all shadow-xl">
+                    <i class="fa-solid fa-phone-volume text-amber-400 mr-3"></i> Call +91 8679195573
+                </a>
+            </div>
 
-    onValue(ref(db, 'ticketPrices'), (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        ticketPrices = {
-          oneWay: parseFloat(data.oneWay) || 1299,
-          returnWay: parseFloat(data.returnWay) || 1299,
-          twoWay: parseFloat(data.twoWay) || 2500
-        };
-      }
-      updateBookingUI();
-    });
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 max-w-4xl mx-auto">
+                <div class="bg-gray-900/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gray-800/80 shadow-lg hover:-translate-y-1 transition transform duration-300">
+                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400 brand-font">Direct</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider">Haridwar to Katra</p>
+                </div>
+                <div class="bg-gray-900/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gray-800/80 shadow-lg hover:-translate-y-1 transition transform duration-300">
+                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400 brand-font">100%</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider">Fully AC Coach</p>
+                </div>
+                <div class="bg-gray-900/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gray-800/80 shadow-lg hover:-translate-y-1 transition transform duration-300">
+                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400 brand-font">4.9 ★</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider">Customer Rating</p>
+                </div>
+                <div class="bg-gray-900/60 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-gray-800/80 shadow-lg hover:-translate-y-1 transition transform duration-300">
+                    <h3 class="text-2xl sm:text-3xl font-black text-amber-400 brand-font">Daily</h3>
+                    <p class="text-xs text-gray-400 mt-1 font-semibold uppercase tracking-wider">Guaranteed Dep.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    function stopPreviousListeners() {
-      if (unsubFwd) { unsubFwd(); unsubFwd = null; }
-      if (unsubRet) { unsubRet(); unsubRet = null; }
-    }
+    <!-- Route Section -->
+    <section id="routes" class="py-20 md:py-28 px-4 md:px-6 max-w-5xl mx-auto relative">
+        <div class="text-center space-y-4 mb-14 md:mb-20">
+            <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full inline-block mb-2">Official Daily Route</span>
+            <h2 class="text-3xl md:text-5xl font-black text-white brand-font">Our Primary Journey Route</h2>
+            <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto">Operating daily luxury two-way services between Haridwar (Kashyap Samaj Ashram) and Mata Vaishno Devi (Katra).</p>
+        </div>
 
-    window.changeJourneyType = function() {
-      const type = document.querySelector('input[name="journey_type"]:checked').value;
-      const headerRoute = document.getElementById('header-route');
-      const returnDateContainer = document.getElementById('return-date-container');
-      selectedSeats = [];
+        <div class="hover-3d bg-gray-900 border border-gray-800 rounded-3xl p-6 sm:p-10 relative shadow-2xl z-10">
+            <!-- Decorative dashed line connecting dots -->
+            <div class="absolute left-[38px] sm:left-[54px] top-[110px] sm:top-[120px] bottom-[100px] w-1 border-l-2 border-dashed border-gray-700"></div>
 
-      if(type === 'forward') {
-        headerRoute.innerHTML = '<span class="text-amber-300 font-semibold text-sm"><i class="fa-solid fa-location-dot text-red-400 mr-1"></i> Haridwar</span> <i class="fa-solid fa-arrow-right-long text-amber-400"></i> <span class="text-amber-300 font-semibold text-sm"><i class="fa-solid fa-location-dot text-green-400 mr-1"></i> Katra</span>';
-        returnDateContainer.classList.add('hidden');
-      } else if (type === 'return') {
-        headerRoute.innerHTML = '<span class="text-amber-300 font-semibold text-sm"><i class="fa-solid fa-location-dot text-green-400 mr-1"></i> Katra</span> <i class="fa-solid fa-arrow-right-long text-amber-400"></i> <span class="text-amber-300 font-semibold text-sm"><i class="fa-solid fa-location-dot text-red-400 mr-1"></i> Haridwar</span>';
-        returnDateContainer.classList.add('hidden');
-      } else if (type === 'twoway') {
-        headerRoute.innerHTML = '<span class="text-amber-300 font-semibold text-sm"><i class="fa-solid fa-arrows-left-right text-amber-400 mr-1"></i> Haridwar <-> Katra (Round Trip)</span>';
-        returnDateContainer.classList.remove('hidden');
-      }
+            <div class="flex justify-between items-start mb-10">
+                <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full flex items-center">
+                    <i class="fa-solid fa-mountain-sun mr-2"></i> Sacred Yatra (Both Ways)
+                </span>
+                <span class="text-gray-400 text-xs sm:text-sm font-semibold flex items-center">
+                    <i class="fa-regular fa-clock mr-2 text-amber-400"></i> Daily Schedule
+                </span>
+            </div>
+            
+            <div class="space-y-10 mb-10 relative z-10">
+                <!-- Point A -->
+                <div class="flex items-center gap-5">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-500 flex items-center justify-center text-gray-950 font-black text-sm sm:text-base shadow-[0_0_15px_rgba(245,158,11,0.5)] z-10">A</div>
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mb-1">Haridwar</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm">Departure: Kashyap Samaj Ashram</p>
+                    </div>
+                </div>
+                
+                <!-- Middle Text -->
+                <div class="pl-[3.25rem] sm:pl-16 text-amber-400/80 text-xs sm:text-sm font-medium flex items-center gap-3 py-2">
+                    <div class="p-2 bg-gray-950 rounded-full border border-gray-800"><i class="fa-solid fa-arrows-up-down"></i></div>
+                    <span>Direct Overnight AC Service</span>
+                </div>
+                
+                <!-- Point B -->
+                <div class="flex items-center gap-5">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-400 flex items-center justify-center text-gray-950 font-black text-sm sm:text-base shadow-[0_0_15px_rgba(52,211,153,0.4)] z-10">B</div>
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mb-1">Katra (Vaishno Devi)</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm">Arrival: Katra Main Bus Stand</p>
+                    </div>
+                </div>
+            </div>
 
-      if(selectedDate) {
-        let d = new Date(selectedDate);
-        d.setDate(d.getDate() + 1);
-        const retInput = document.getElementById('return-date-input');
-        retInput.value = d.toISOString().split('T')[0];
-        retInput.min = selectedDate;
-      }
-      updateBookingUI();
-      fetchSeats();
-    };
+            <div class="pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-6 bg-gray-950/30 p-4 sm:p-6 rounded-2xl">
+                <div>
+                    <span class="text-xs text-gray-400 block mb-1 uppercase tracking-wider font-semibold">Premium Fleet</span>
+                    <span class="text-base sm:text-lg font-bold text-gray-100 flex items-center"><i class="fa-solid fa-snowflake text-amber-400 mr-2"></i> Volvo AC Sleeper & Seater</span>
+                </div>
+                <a href="booking.html" class="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-gray-950 font-black text-sm px-8 py-3.5 rounded-xl transition shadow-lg text-center flex items-center justify-center gap-2 transform hover:scale-105">
+                    <i class="fa-solid fa-ticket"></i> Reserve Seat
+                </a>
+            </div>
+        </div>
+    </section>
 
-    function initDateStrip() {
-      const dateStrip = document.getElementById('date-strip');
-      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const today = new Date();
-
-      for (let i = 0; i < 60; i++) {
-        const futureDate = new Date();
-        futureDate.setDate(today.getDate() + i);
-        const year = futureDate.getFullYear();
-        const month = String(futureDate.getMonth() + 1).padStart(2, '0');
-        const day = String(futureDate.getDate()).padStart(2, '0');
-        const dateKey = `${year}-${month}-${day}`;
-        const dayName = i === 0 ? "Today" : (i === 1 ? "Tomorrow" : days[futureDate.getDay()]);
-        const monthName = months[futureDate.getMonth()];
-        const dateNum = futureDate.getDate();
-
-        const dateCard = document.createElement('button');
-        dateCard.type = "button";
-        dateCard.className = `date-card flex-shrink-0 w-20 py-2.5 px-2 rounded-xl text-center border transition-all ${i === 0 ? 'bg-amber-500 text-slate-950 border-amber-400 font-bold shadow-lg scale-105' : 'bg-slate-800 text-slate-300 border-slate-700 hover:border-amber-500/50'}`;
+    <!-- Mobile-Friendly Bus Poster Slider Section -->
+    <section id="fleet" class="py-20 md:py-28 px-4 md:px-6 bg-gray-900 border-y border-gray-800 relative shadow-inner">
+        <!-- Abstract background pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#fbbf24 1px, transparent 1px); background-size: 30px 30px;"></div>
         
-        dateCard.onclick = () => {
-          document.querySelectorAll('.date-card').forEach(btn => btn.className = 'date-card flex-shrink-0 w-20 py-2.5 px-2 rounded-xl text-center border transition-all bg-slate-800 text-slate-300 border-slate-700 hover:border-amber-500/50');
-          dateCard.className = 'date-card flex-shrink-0 w-20 py-2.5 px-2 rounded-xl text-center border transition-all bg-amber-500 text-slate-950 border-amber-400 font-bold shadow-lg scale-105';
-          selectedDate = dateKey;
-          document.getElementById('selected-date-label').innerText = `${dateNum} ${monthName} ${year}`;
-          
-          const retInput = document.getElementById('return-date-input');
-          retInput.min = dateKey;
-          if(!retInput.value || retInput.value < dateKey) {
-            let nextDay = new Date(futureDate);
-            nextDay.setDate(nextDay.getDate() + 1);
-            retInput.value = nextDay.toISOString().split('T')[0];
-          }
+        <div class="max-w-xl mx-auto text-center space-y-4 mb-12 relative z-10">
+            <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full inline-block">Unmatched Comfort</span>
+            <h2 class="text-3xl md:text-5xl font-black text-white brand-font">Our Luxury Fleet</h2>
+            <p class="text-gray-400 text-sm md:text-base">Experience the pinnacle of comfort with our fully air-conditioned luxury coaches for your sacred journey.</p>
+        </div>
 
-          selectedSeats = [];
-          updateBookingUI();
-          fetchSeats();
-        };
+        <!-- 3D Mobile-Friendly Poster Container (Crystal Clear Scaling) -->
+        <div class="max-w-2xl mx-auto bg-gray-950 border border-amber-500/30 rounded-3xl p-3 sm:p-4 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)] relative overflow-hidden transform transition hover:scale-[1.01] duration-500 z-10">
+            <div id="busSlider" class="relative w-full h-56 sm:h-80 md:h-96 rounded-2xl overflow-hidden shadow-inner bg-gray-900">
+                <!-- Slide 1 -->
+                <div class="slide active w-full h-full">
+                    <img src="bus1.jpg" alt="Luxury Volvo AC Sleeper Bus" class="w-full h-full object-cover rounded-2xl transform hover:scale-105 transition duration-700">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent p-4 pt-12">
+                        <div class="inline-block bg-gray-900/90 backdrop-blur border border-gray-700 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg">
+                            <i class="fa-solid fa-bed mr-1.5"></i> Premium Volvo AC Sleeper
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide w-full h-full">
+                    <img src="bus2.jpg" alt="2x2 Luxury AC Pushback Seater Bus" class="w-full h-full object-cover rounded-2xl transform hover:scale-105 transition duration-700">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent p-4 pt-12">
+                        <div class="inline-block bg-gray-900/90 backdrop-blur border border-gray-700 text-emerald-400 text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg">
+                            <i class="fa-solid fa-chair mr-1.5"></i> 2x2 AC Pushback Seater
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide w-full h-full">
+                    <img src="bus3.jpg" alt="Deluxe Special AC Coach" class="w-full h-full object-cover rounded-2xl transform hover:scale-105 transition duration-700">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-gray-950 via-gray-950/70 to-transparent p-4 pt-12">
+                        <div class="inline-block bg-gray-900/90 backdrop-blur border border-gray-700 text-cyan-400 text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg">
+                            <i class="fa-solid fa-snowflake mr-1.5"></i> Deluxe AC Tourer Coach
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        dateCard.innerHTML = `<div class="text-[10px] uppercase font-bold tracking-wider">${dayName}</div><div class="text-xl font-extrabold my-0.5">${dateNum}</div><div class="text-[11px] font-medium">${monthName}</div>`;
-        dateStrip.appendChild(dateCard);
+            <!-- Dots Indicator -->
+            <div class="flex justify-center gap-2 mt-4 pb-2">
+                <span class="dot w-2.5 h-2.5 rounded-full bg-amber-400 inline-block cursor-pointer transition-all duration-300 shadow-[0_0_8px_rgba(245,158,11,0.8)]"></span>
+                <span class="dot w-2.5 h-2.5 rounded-full bg-gray-700 inline-block cursor-pointer transition-all duration-300"></span>
+                <span class="dot w-2.5 h-2.5 rounded-full bg-gray-700 inline-block cursor-pointer transition-all duration-300"></span>
+            </div>
+        </div>
+    </section>
 
-        if (i === 0) dateCard.click();
-      }
-    }
+    <!-- Why Choose Us -->
+    <section id="why-us" class="py-20 md:py-28 px-4 md:px-6 bg-gray-950">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full inline-block">Why Venkateswara</span>
+                <h2 class="text-3xl md:text-5xl font-black text-white brand-font">Your Journey, Our Responsibility</h2>
+            </div>
 
-    window.fetchSeats = function() {
-      if (!selectedDate) return;
-      stopPreviousListeners();
-      currentSeatsData = {};
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Card 1 -->
+                <div class="hover-3d bg-gray-900 p-8 rounded-3xl border border-gray-800 text-center space-y-4 shadow-lg group">
+                    <div class="w-16 h-16 bg-gray-950 border border-gray-800 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-2xl group-hover:scale-110 group-hover:bg-amber-500/10 transition duration-300 shadow-inner">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg brand-font">Punctual Departures</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">On-time departure from Kashyap Samaj Ashram, Haridwar, ensuring a reliable schedule.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="hover-3d bg-gray-900 p-8 rounded-3xl border border-gray-800 text-center space-y-4 shadow-lg group">
+                    <div class="w-16 h-16 bg-gray-950 border border-gray-800 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-2xl group-hover:scale-110 group-hover:bg-amber-500/10 transition duration-300 shadow-inner">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg brand-font">Expert Drivers</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Highly experienced and verified drivers specialized in highway and mountain terrains.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="hover-3d bg-gray-900 p-8 rounded-3xl border border-gray-800 text-center space-y-4 shadow-lg group">
+                    <div class="w-16 h-16 bg-gray-950 border border-gray-800 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-2xl group-hover:scale-110 group-hover:bg-amber-500/10 transition duration-300 shadow-inner">
+                        <i class="fa-solid fa-snowflake"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg brand-font">Premium Comfort</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Hygienic seating, clean blankets, and high-performance climate control cooling.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="hover-3d bg-gray-900 p-8 rounded-3xl border border-gray-800 text-center space-y-4 shadow-lg group">
+                    <div class="w-16 h-16 bg-gray-950 border border-gray-800 text-amber-400 rounded-2xl flex items-center justify-center mx-auto text-2xl group-hover:scale-110 group-hover:bg-amber-500/10 transition duration-300 shadow-inner">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg brand-font">24/7 Assistance</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Direct in-person and on-call assistance available from our Haridwar counter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      const type = document.querySelector('input[name="journey_type"]:checked').value;
+    <!-- FAQs -->
+    <section id="faqs" class="py-20 md:py-28 px-4 md:px-6 max-w-4xl mx-auto">
+        <div class="text-center space-y-4 mb-12">
+            <h2 class="text-3xl md:text-5xl font-black text-white brand-font">Frequently Asked Questions</h2>
+        </div>
+        <div class="space-y-5 text-sm sm:text-base">
+            <div class="hover-3d bg-gray-900 p-6 sm:p-8 rounded-2xl border border-gray-800 shadow-md">
+                <h3 class="font-bold text-white text-lg mb-2 flex items-center"><i class="fa-solid fa-circle-question text-amber-400 mr-3 text-xl"></i> Where does the bus depart from?</h3>
+                <p class="text-gray-400 leading-relaxed pl-8">All <strong>100% AC buses</strong> operated by Venkateswara Holidays depart directly from <strong>Kashyap Samaj Ashram, Haridwar</strong>.</p>
+            </div>
+            <div class="hover-3d bg-gray-900 p-6 sm:p-8 rounded-2xl border border-gray-800 shadow-md">
+                <h3 class="font-bold text-white text-lg mb-2 flex items-center"><i class="fa-solid fa-circle-question text-amber-400 mr-3 text-xl"></i> How can I book my seat online?</h3>
+                <p class="text-gray-400 leading-relaxed pl-8">Simply click on the <strong>"Book Ticket"</strong> button anywhere on this website. You will be securely redirected to our booking portal to reserve your preferred seats instantly.</p>
+            </div>
+        </div>
+    </section>
 
-      if (type === 'forward') {
-        const fwdRef = ref(db, `bus_seats/${selectedDate}/H_to_K`);
-        unsubFwd = onValue(fwdRef, snap => {
-          currentSeatsData = snap.val() || {};
-          renderSeatsStatus();
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-950 border-t border-gray-900 text-gray-400 py-16 px-4 md:px-6 relative overflow-hidden">
+        <!-- Footer glowing accent -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 relative z-10">
+            <div class="space-y-4">
+                <span class="text-2xl font-black text-white brand-font tracking-wide">VENKATESWARA <br/><span class="text-amber-400 text-sm tracking-widest font-sans uppercase">Holidays</span></span>
+                <p class="text-gray-400 text-sm leading-relaxed mt-4">Providing premium luxury AC bus services daily from Haridwar (Kashyap Samaj Ashram) to Mata Vaishno Devi (Katra).</p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-bold text-white text-lg brand-font border-b border-gray-800 pb-2 inline-block">Quick Links</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="booking.html" class="hover:text-amber-400 transition flex items-center"><i class="fa-solid fa-chevron-right text-amber-500/50 mr-2 text-xs"></i> Book AC Ticket</a></li>
+                    <li><a href="#routes" class="hover:text-amber-400 transition flex items-center"><i class="fa-solid fa-chevron-right text-amber-500/50 mr-2 text-xs"></i> Haridwar to Katra Route</a></li>
+                    <li><a href="dashboard.html" class="hover:text-amber-400 transition flex items-center"><i class="fa-solid fa-chevron-right text-amber-500/50 mr-2 text-xs"></i> Admin Portal</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-bold text-white text-lg brand-font border-b border-gray-800 pb-2 inline-block">Haridwar Office</h4>
+                <div class="space-y-3 text-sm">
+                    <p class="flex items-start"><i class="fa-solid fa-location-dot text-amber-400 mr-3 mt-1"></i> Kashyap Samaj Ashram,<br>Haridwar, Uttarakhand</p>
+                    <p class="flex items-center"><i class="fa-solid fa-phone text-amber-400 mr-3"></i> <a href="tel:+918679195573" class="hover:text-amber-400 transition">+91 8679195573</a></p>
+                    <p class="flex items-center"><i class="fa-solid fa-envelope text-amber-400 mr-3"></i> <a href="mailto:holidaysvenkateswara@gmail.com" class="hover:text-amber-400 transition break-all">holidaysvenkateswara@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center pt-8 border-t border-gray-900 text-gray-600 text-sm font-medium relative z-10">
+            © 2026 Venkateswara Holidays. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JS Scripts for Mobile Menu & Poster Slider -->
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if(mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
         });
-      } else if (type === 'return') {
-        const retRef = ref(db, `bus_seats/${selectedDate}/K_to_H`);
-        unsubRet = onValue(retRef, snap => {
-          currentSeatsData = snap.val() || {};
-          renderSeatsStatus();
-        });
-      } else if (type === 'twoway') {
-        const retDate = document.getElementById('return-date-input').value;
-        if(!retDate) return;
 
-        let fwdData = {}, retData = {};
-        let fwdDone = false, retDone = false;
-
-        const syncTwoWay = () => {
-          if(fwdDone && retDone) {
-            currentSeatsData = {};
-            const allKeys = new Set([...Object.keys(fwdData), ...Object.keys(retData)]);
-            allKeys.forEach(seatKey => {
-              if (fwdData[seatKey]?.status === 'booked' || retData[seatKey]?.status === 'booked') {
-                currentSeatsData[seatKey] = { status: 'booked' };
-              }
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
             });
-            renderSeatsStatus();
-          }
-        };
-
-        const fwdRef = ref(db, `bus_seats/${selectedDate}/H_to_K`);
-        const retRef = ref(db, `bus_seats/${retDate}/K_to_H`);
-
-        unsubFwd = onValue(fwdRef, snap => {
-          fwdData = snap.val() || {};
-          fwdDone = true;
-          syncTwoWay();
         });
 
-        unsubRet = onValue(retRef, snap => {
-          retData = snap.val() || {};
-          retDone = true;
-          syncTwoWay();
+        // Bus Image Poster Slider Logic
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                dots[i].classList.remove('bg-amber-400', 'shadow-[0_0_8px_rgba(245,158,11,0.8)]');
+                dots[i].classList.add('bg-gray-700');
+            });
+            slides[index].classList.add('active');
+            dots[index].classList.remove('bg-gray-700');
+            dots[index].classList.add('bg-amber-400', 'shadow-[0_0_8px_rgba(245,158,11,0.8)]');
+        }
+
+        function autoSlide() {
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlide(slideIndex);
+        }
+
+        let slideInterval = setInterval(autoSlide, 4000); // Slightly slower for a more premium feel
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                slideIndex = index;
+                showSlide(slideIndex);
+                slideInterval = setInterval(autoSlide, 4000);
+            });
         });
-      }
-    };
-
-    /* ------ CUSTOM DECK LAYOUTS ------ */
-    const lowerDeckLayout = [
-      ['L1', null, 'L12', 'L18'],
-      ['L2', 'L7', 'L13', 'L19'],
-      ['L3', 'L8', 'L14', 'L20'],
-      ['L4', 'L9', 'L15', 'L21'],
-      ['L5', 'L10', 'L16', 'L22'],
-      ['L6', 'L11', 'L17', 'L23']
-    ];
-
-    const upperDeckLayout = [
-      ['U1', null, 'U12', 'U13'],
-      ['U2', 'U7', 'U14', 'U15'],
-      ['U3', 'U8', 'U16', 'U17'],
-      ['U4', 'U9', 'U18', 'U19'],
-      ['U5', 'U10', 'U20', 'U21'],
-      ['U6', 'U11', 'U22', 'U23']
-    ];
-
-    function createSeatHTML(seatCode) {
-      const seat = document.createElement('div');
-      seat.id = `seat-${seatCode}`;
-      seat.className = 'sleeper-seat available';
-      seat.onclick = () => handleSeatClick(seatCode);
-      seat.innerHTML = `<div class="sleeper-pillow"></div><span>${seatCode}</span>`;
-      return seat;
-    }
-
-    function createEmptySpace() {
-      const empty = document.createElement('div');
-      empty.style.width = '55px';
-      empty.style.height = '95px';
-      return empty;
-    }
-
-    function buildCustomDeck(layout, containerId) {
-      const container = document.getElementById(containerId);
-      container.innerHTML = '';
-      
-      layout.forEach(rowArr => {
-        const rowDiv = document.createElement('div');
-        rowDiv.className = 'flex justify-between items-center gap-4';
-        
-        // Left Side (Conductor Side)
-        const leftGroup = document.createElement('div');
-        leftGroup.className = 'flex gap-2';
-        
-        if (rowArr[0]) leftGroup.appendChild(createSeatHTML(rowArr[0]));
-        else leftGroup.appendChild(createEmptySpace());
-        
-        if (rowArr[1]) leftGroup.appendChild(createSeatHTML(rowArr[1]));
-        else leftGroup.appendChild(createEmptySpace());
-        
-        // Aisle Space
-        const aisle = document.createElement('div');
-        aisle.className = 'w-8';
-        
-        // Right Side (Driver Side)
-        const rightGroup = document.createElement('div');
-        rightGroup.className = 'flex gap-2';
-        
-        if (rowArr[2]) rightGroup.appendChild(createSeatHTML(rowArr[2]));
-        else rightGroup.appendChild(createEmptySpace());
-        
-        if (rowArr[3]) rightGroup.appendChild(createSeatHTML(rowArr[3]));
-        else rightGroup.appendChild(createEmptySpace());
-        
-        rowDiv.appendChild(leftGroup);
-        rowDiv.appendChild(aisle);
-        rowDiv.appendChild(rightGroup);
-        container.appendChild(rowDiv);
-      });
-    }
-    /* ---------------------------------- */
-
-    window.switchDeck = function(deck) {
-      document.getElementById('lower-deck-grid').classList.toggle('hidden', deck !== 'lower');
-      document.getElementById('upper-deck-grid').classList.toggle('hidden', deck !== 'upper');
-      document.getElementById('tab-lower').className = deck === 'lower' ? 'flex-1 py-2.5 rounded-xl font-semibold text-sm transition-all bg-amber-500 text-slate-950 shadow-lg' : 'flex-1 py-2.5 rounded-xl font-semibold text-sm transition-all bg-slate-800 text-slate-300 hover:bg-slate-700';
-      document.getElementById('tab-upper').className = deck === 'upper' ? 'flex-1 py-2.5 rounded-xl font-semibold text-sm transition-all bg-amber-500 text-slate-950 shadow-lg' : 'flex-1 py-2.5 rounded-xl font-semibold text-sm transition-all bg-slate-800 text-slate-300 hover:bg-slate-700';
-    };
-
-    function renderSeatsStatus() {
-      document.querySelectorAll('.sleeper-seat').forEach(seatElem => {
-        const seatCode = seatElem.id.replace('seat-', '');
-        const status = currentSeatsData[seatCode]?.status || 'available';
-
-        if (selectedSeats.includes(seatCode)) {
-          if (status === 'booked') {
-            selectedSeats = selectedSeats.filter(s => s !== seatCode);
-            updateBookingUI();
-          } else {
-            seatElem.className = 'sleeper-seat selected';
-            return;
-          }
-        }
-        seatElem.className = `sleeper-seat ${status}`;
-      });
-    }
-
-    function handleSeatClick(seatCode) {
-      if (currentSeatsData[seatCode]?.status === 'booked') return;
-      const index = selectedSeats.indexOf(seatCode);
-      if (index > -1) {
-        selectedSeats.splice(index, 1);
-      } else {
-        if(selectedSeats.length >= 6) return alert("Maximum 6 seats allowed per booking.");
-        selectedSeats.push(seatCode);
-      }
-      renderSeatsStatus();
-      updateBookingUI();
-    }
-
-    function updateBookingUI() {
-      const emptyMsg = document.getElementById('empty-selection-msg');
-      const bookingForm = document.getElementById('booking-form');
-      const container = document.getElementById('dynamic-passengers-container');
-      const type = document.querySelector('input[name="journey_type"]:checked').value;
-
-      let activePrice = ticketPrices.oneWay;
-      let tripName = "One Way (Haridwar to Katra)";
-
-      if (type === 'forward') {
-        activePrice = ticketPrices.oneWay;
-        tripName = "Haridwar to Katra";
-      } else if (type === 'return') {
-        activePrice = ticketPrices.returnWay;
-        tripName = "Katra to Haridwar";
-      } else if (type === 'twoway') {
-        activePrice = ticketPrices.twoWay;
-        tripName = "Round Trip (Two Way)";
-      }
-
-      document.getElementById('display-price-label').innerText = `${activePrice.toLocaleString('en-IN')} / Seat (${type === 'twoway' ? 'Two Way' : 'One Way'})`;
-      document.getElementById('passenger-count').innerText = selectedSeats.length;
-
-      if (selectedSeats.length === 0) {
-        emptyMsg.classList.remove('hidden');
-        bookingForm.classList.add('hidden');
-        return;
-      }
-
-      emptyMsg.classList.add('hidden');
-      bookingForm.classList.remove('hidden');
-
-      const grandTotal = selectedSeats.length * activePrice;
-
-      document.getElementById('summary-journey').innerText = tripName;
-      document.getElementById('summary-seats').innerText = selectedSeats.join(', ');
-      document.getElementById('summary-total').innerText = grandTotal.toLocaleString('en-IN');
-
-      container.innerHTML = '';
-      selectedSeats.forEach(seatCode => {
-        container.innerHTML += `
-        <div class="bg-slate-900/90 p-3 rounded-xl border border-slate-700/80 space-y-2">
-          <div class="text-xs font-bold text-amber-400 flex justify-between">
-            <span><i class="fa-solid fa-bed mr-1"></i> Seat: ${seatCode}</span>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-            <input type="text" id="p-name-${seatCode}" required placeholder="Passenger Name" class="bg-slate-800 border border-slate-700 rounded-lg p-2 text-xs text-white focus:border-amber-500 outline-none">
-            <input type="number" id="p-age-${seatCode}" required min="1" max="100" placeholder="Age" class="bg-slate-800 border border-slate-700 rounded-lg p-2 text-xs text-white focus:border-amber-500 outline-none">
-            <select id="p-gender-${seatCode}" required class="bg-slate-800 border border-slate-700 rounded-lg p-2 text-xs text-white focus:border-amber-500 outline-none">
-              <option value="" disabled selected>Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
-        </div>`;
-      });
-    }
-
-    document.getElementById('booking-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const submitBtn = document.getElementById('submit-btn');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
-
-      const custName = document.getElementById('cust-name').value;
-      const phone = document.getElementById('cust-phone').value;
-      const type = document.querySelector('input[name="journey_type"]:checked').value;
-      const retDate = document.getElementById('return-date-input').value;
-
-      let activePrice = (type === 'twoway') ? ticketPrices.twoWay : (type === 'return' ? ticketPrices.returnWay : ticketPrices.oneWay);
-      const totalAmount = selectedSeats.length * activePrice;
-
-      const seatUpdates = {};
-      const passengers = [];
-
-      selectedSeats.forEach(seatCode => {
-        let pData = {
-          seat: seatCode,
-          name: document.getElementById(`p-name-${seatCode}`).value,
-          age: document.getElementById(`p-age-${seatCode}`).value,
-          gender: document.getElementById(`p-gender-${seatCode}`).value
-        };
-        passengers.push(pData);
-
-        let seatStatusObj = { status: 'booked', bookedBy: custName, gender: pData.gender };
-
-        if (type === 'forward' || type === 'twoway') {
-          seatUpdates[`bus_seats/${selectedDate}/H_to_K/${seatCode}`] = seatStatusObj;
-        }
-        if (type === 'return') {
-          seatUpdates[`bus_seats/${selectedDate}/K_to_H/${seatCode}`] = seatStatusObj;
-        }
-        if (type === 'twoway') {
-          seatUpdates[`bus_seats/${retDate}/K_to_H/${seatCode}`] = seatStatusObj;
-        }
-      });
-
-      const bookingId = 'BK' + Date.now().toString().slice(-6);
-      const tripDisplay = type === 'twoway' ? 'Round Trip (Two Way)' : (type === 'return' ? 'Return Only' : 'One Way');
-
-      const bookingData = {
-        id: bookingId,
-        bookingId: bookingId,
-        type: type,
-        tripType: tripDisplay,
-        date: selectedDate,
-        returnDate: (type === 'twoway') ? retDate : null,
-        custName: custName,
-        name: custName,
-        phone: phone,
-        seats: selectedSeats.join(', '),
-        seatsCount: selectedSeats.length,
-        passengers: passengers,
-        totalAmount: totalAmount,
-        totalPrice: totalAmount,
-        paymentMode: "COD",
-        status: "Pending",
-        createdAt: new Date().toISOString()
-      };
-
-      try {
-        await set(ref(db, `bookings/${bookingId}`), bookingData);
-        await update(ref(db), seatUpdates);
-
-        document.getElementById('ticket-id').innerText = bookingId;
-        document.getElementById('ticket-type').innerText = tripDisplay;
-        document.getElementById('ticket-date').innerText = type === 'twoway' ? `${selectedDate} to ${retDate}` : selectedDate;
-        document.getElementById('ticket-name').innerText = custName;
-        document.getElementById('ticket-seats').innerText = selectedSeats.join(', ');
-        document.getElementById('ticket-amount').innerText = `₹ ${totalAmount.toLocaleString('en-IN')}`;
-
-        document.getElementById('ticket-modal').classList.remove('hidden');
-
-        selectedSeats = [];
-        document.getElementById('booking-form').reset();
-        updateBookingUI();
-      } catch (error) {
-        console.error("Booking failed:", error);
-        alert("Booking error! Please try again.");
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = `<i class="fa-solid fa-hand-holding-dollar"></i> Book Now (Pay on Bus)`;
-      }
-    });
-
-    window.closeModal = () => document.getElementById('ticket-modal').classList.add('hidden');
-
-    // Building Deck Layouts using custom layouts
-    buildCustomDeck(lowerDeckLayout, 'lower-deck-grid');
-    buildCustomDeck(upperDeckLayout, 'upper-deck-grid');
-    initDateStrip();
-  </script>
+    </script>
 </body>
 </html>
