@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vaishno Devi Express | Luxury Sleeper Bus Booking</title>
+  <title>Venkateswara holidays | Luxury Sleeper Bus Booking</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
@@ -13,12 +13,10 @@
   
   <style>
     body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #f8fafc; }
-    /* Custom Scrollbar for 60-Day Date Strip */
     .date-scroll::-webkit-scrollbar { height: 6px; }
     .date-scroll::-webkit-scrollbar-track { background: #1e293b; border-radius: 10px; }
     .date-scroll::-webkit-scrollbar-thumb { background: #d97706; border-radius: 10px; }
     
-    /* Seat Styling */
     .sleeper-seat {
       width: 55px; height: 95px; border-radius: 10px; cursor: pointer;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -29,7 +27,6 @@
     .sleeper-pillow {
       width: 80%; height: 12px; border-radius: 4px; opacity: 0.6; background: rgba(255, 255, 255, 0.4);
     }
-    /* Seat Status Colors */
     .available { background-color: #2563eb; color: white; border-color: #3b82f6; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3); }
     .available:hover { transform: translateY(-3px) scale(1.03); background-color: #1d4ed8; }
     .selected { background-color: #16a34a; color: white; border-color: #22c55e; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.5); transform: scale(1.05); }
@@ -42,7 +39,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-  <!-- Top Luxury Header -->
+  <!-- Header -->
   <header class="bg-gradient-to-r from-red-900 via-red-700 to-amber-700 shadow-2xl border-b border-amber-500/30">
     <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="flex items-center gap-3">
@@ -51,7 +48,7 @@
         </div>
         <div>
           <h1 class="text-2xl md:text-3xl font-extrabold tracking-wide text-white drop-shadow-md">
-            MAA VAISHNO EXPRESS
+            Venkateswara holidays
           </h1>
           <p class="text-xs text-amber-200 font-medium">Premium AC Multi-Axle Sleeper</p>
         </div>
@@ -65,7 +62,7 @@
     </div>
   </header>
 
-  <!-- Journey Type Selector -->
+  <!-- Trip Selection -->
   <section class="bg-slate-800 py-3 border-b border-slate-700">
     <div class="max-w-7xl mx-auto px-4 flex flex-wrap gap-4 items-center justify-center md:justify-start">
       <span class="text-sm font-bold text-slate-300 mr-2"><i class="fa-solid fa-route text-amber-400 mr-1"></i> Trip Type:</span>
@@ -84,7 +81,7 @@
     </div>
   </section>
 
-  <!-- Dynamic 60-Day Date Strip -->
+  <!-- Date Selection -->
   <section class="bg-slate-900/90 py-4 border-b border-slate-800 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-2 gap-3">
@@ -93,17 +90,14 @@
           <span class="text-xs font-bold text-amber-400 pl-2">Return Date:</span>
           <input type="date" id="return-date-input" onchange="fetchSeats()" class="bg-slate-900 text-white text-xs border border-slate-600 rounded p-1 outline-none focus:border-amber-500">
         </div>
-        <span id="selected-date-label" class="text-xs text-slate-300 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">Loading date...</span>
+        <span id="selected-date-label" class="text-xs text-slate-300 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">Loading...</span>
       </div>
-      <div id="date-strip" class="date-scroll flex gap-3 overflow-x-auto pb-2 pt-1">
-        <!-- 60 Days Cards injected via JS -->
-      </div>
+      <div id="date-strip" class="date-scroll flex gap-3 overflow-x-auto pb-2 pt-1"></div>
     </div>
   </section>
 
-  <!-- Main Booking Section -->
+  <!-- Main Booking Container -->
   <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow">
-    <!-- Legend Bar -->
     <div class="bg-slate-800/80 p-4 rounded-2xl mb-8 border border-slate-700/60 flex flex-wrap justify-around items-center gap-4 text-xs font-medium">
       <div class="flex items-center gap-2"><div class="w-5 h-5 rounded-md available shadow"></div> Available</div>
       <div class="flex items-center gap-2"><div class="w-5 h-5 rounded-md selected shadow"></div> Selected</div>
@@ -114,7 +108,6 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <!-- Left Side: Bus Layout -->
       <div class="lg:col-span-7 flex flex-col gap-8">
         <div class="bus-container p-6 relative">
           <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-700">
@@ -132,7 +125,6 @@
         </div>
       </div>
 
-      <!-- Right Side: Booking Form -->
       <div class="lg:col-span-5">
         <div class="bg-slate-800/90 rounded-2xl p-6 border border-slate-700/80 shadow-2xl sticky top-28">
           <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-amber-400 border-b border-slate-700 pb-3">
@@ -141,7 +133,7 @@
           
           <div id="empty-selection-msg" class="text-center py-10 text-slate-400">
             <i class="fa-solid fa-chair text-4xl mb-3 text-slate-600 block"></i>
-            <p class="text-sm">Please select seats from the layout to proceed.</p>
+            <p class="text-sm">Please select seats to proceed.</p>
           </div>
 
           <form id="booking-form" class="hidden space-y-4">
@@ -169,7 +161,6 @@
               <div id="dynamic-passengers-container" class="space-y-3 max-h-60 overflow-y-auto pr-1"></div>
             </div>
 
-            <!-- Price Breakdown -->
             <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-700/80 space-y-2 text-sm">
               <div class="flex justify-between text-slate-400">
                 <span>Journey:</span>
@@ -198,7 +189,7 @@
     </div>
   </main>
 
-  <!-- Ticket Confirmation Modal -->
+  <!-- Ticket Modal -->
   <div id="ticket-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-center items-center p-4 hidden">
     <div class="bg-slate-800 rounded-2xl max-w-md w-full p-6 border border-amber-500/40 shadow-2xl relative text-center">
       <div class="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
@@ -223,10 +214,9 @@
     </div>
   </div>
 
-  <!-- Firebase SDK & Logic -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, onValue, update, push, off, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    import { getDatabase, ref, onValue, update, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AlzaSyAABvh6xwaH4J3RJLOCg_IFggfBLZDgICE",
@@ -244,18 +234,17 @@
     let selectedDate = "";
     let selectedSeats = [];
     let currentSeatsData = {};
-    let activeFirebaseRefs = [];
+    
+    let unsubFwd = null;
+    let unsubRet = null;
 
-    // Dynamic Ticket Prices fetched from Firebase
     let ticketPrices = {
       oneWay: 1299,
       returnWay: 1299,
       twoWay: 2500
     };
 
-    // Listen for Realtime Price Updates from Admin Dashboard
-    const pricesRef = ref(db, 'ticketPrices');
-    onValue(pricesRef, (snapshot) => {
+    onValue(ref(db, 'ticketPrices'), (snapshot) => {
       const data = snapshot.val();
       if (data) {
         ticketPrices = {
@@ -267,11 +256,16 @@
       updateBookingUI();
     });
 
+    function stopPreviousListeners() {
+      if (unsubFwd) { unsubFwd(); unsubFwd = null; }
+      if (unsubRet) { unsubRet(); unsubRet = null; }
+    }
+
     window.changeJourneyType = function() {
       const type = document.querySelector('input[name="journey_type"]:checked').value;
       const headerRoute = document.getElementById('header-route');
       const returnDateContainer = document.getElementById('return-date-container');
-      selectedSeats = []; // Reset seats on mode change
+      selectedSeats = [];
 
       if(type === 'forward') {
         headerRoute.innerHTML = '<span class="text-amber-300 font-semibold text-sm"><i class="fa-solid fa-location-dot text-red-400 mr-1"></i> Haridwar</span> <i class="fa-solid fa-arrow-right-long text-amber-400"></i> <span class="text-amber-300 font-semibold text-sm"><i class="fa-solid fa-location-dot text-green-400 mr-1"></i> Katra</span>';
@@ -287,7 +281,9 @@
       if(selectedDate) {
         let d = new Date(selectedDate);
         d.setDate(d.getDate() + 1);
-        document.getElementById('return-date-input').value = d.toISOString().split('T')[0];
+        const retInput = document.getElementById('return-date-input');
+        retInput.value = d.toISOString().split('T')[0];
+        retInput.min = selectedDate;
       }
       updateBookingUI();
       fetchSeats();
@@ -319,7 +315,15 @@
           dateCard.className = 'date-card flex-shrink-0 w-20 py-2.5 px-2 rounded-xl text-center border transition-all bg-amber-500 text-slate-950 border-amber-400 font-bold shadow-lg scale-105';
           selectedDate = dateKey;
           document.getElementById('selected-date-label').innerText = `${dateNum} ${monthName} ${year}`;
-          document.getElementById('return-date-input').min = dateKey;
+          
+          const retInput = document.getElementById('return-date-input');
+          retInput.min = dateKey;
+          if(!retInput.value || retInput.value < dateKey) {
+            let nextDay = new Date(futureDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+            retInput.value = nextDay.toISOString().split('T')[0];
+          }
+
           selectedSeats = [];
           updateBookingUI();
           fetchSeats();
@@ -334,73 +338,78 @@
 
     window.fetchSeats = function() {
       if (!selectedDate) return;
-      activeFirebaseRefs.forEach(r => off(r));
-      activeFirebaseRefs = [];
+      stopPreviousListeners();
       currentSeatsData = {};
 
       const type = document.querySelector('input[name="journey_type"]:checked').value;
 
       if (type === 'forward') {
-        let r = ref(db, `bus_seats/${selectedDate}/H_to_K`);
-        activeFirebaseRefs.push(r);
-        onValue(r, snap => { currentSeatsData = snap.val() || {}; renderSeatsStatus(); });
+        const fwdRef = ref(db, `bus_seats/${selectedDate}/H_to_K`);
+        unsubFwd = onValue(fwdRef, snap => {
+          currentSeatsData = snap.val() || {};
+          renderSeatsStatus();
+        });
       } else if (type === 'return') {
-        let r = ref(db, `bus_seats/${selectedDate}/K_to_H`);
-        activeFirebaseRefs.push(r);
-        onValue(r, snap => { currentSeatsData = snap.val() || {}; renderSeatsStatus(); });
+        const retRef = ref(db, `bus_seats/${selectedDate}/K_to_H`);
+        unsubRet = onValue(retRef, snap => {
+          currentSeatsData = snap.val() || {};
+          renderSeatsStatus();
+        });
       } else if (type === 'twoway') {
         const retDate = document.getElementById('return-date-input').value;
         if(!retDate) return;
-        let fwdRef = ref(db, `bus_seats/${selectedDate}/H_to_K`);
-        let retRef = ref(db, `bus_seats/${retDate}/K_to_H`);
-        activeFirebaseRefs.push(fwdRef, retRef);
-        let fwdData = {}, retData = {};
-        let fwdLoaded = false, retLoaded = false;
 
-        const mergeData = () => {
-          if (fwdLoaded && retLoaded) {
-            document.querySelectorAll('.sleeper-seat').forEach(el => {
-              let id = el.id.replace('seat-', '');
-              if (fwdData[id]?.status === 'booked' || retData[id]?.status === 'booked') {
-                currentSeatsData[id] = { status: 'booked' };
-              } else {
-                currentSeatsData[id] = { status: 'available' };
+        let fwdData = {}, retData = {};
+        let fwdDone = false, retDone = false;
+
+        const syncTwoWay = () => {
+          if(fwdDone && retDone) {
+            currentSeatsData = {};
+            const allKeys = new Set([...Object.keys(fwdData), ...Object.keys(retData)]);
+            allKeys.forEach(seatKey => {
+              if (fwdData[seatKey]?.status === 'booked' || retData[seatKey]?.status === 'booked') {
+                currentSeatsData[seatKey] = { status: 'booked' };
               }
             });
             renderSeatsStatus();
           }
         };
 
-        onValue(fwdRef, snap => { fwdData = snap.val() || {}; fwdLoaded = true; mergeData(); });
-        onValue(retRef, snap => { retData = snap.val() || {}; retLoaded = true; mergeData(); });
+        const fwdRef = ref(db, `bus_seats/${selectedDate}/H_to_K`);
+        const retRef = ref(db, `bus_seats/${retDate}/K_to_H`);
+
+        unsubFwd = onValue(fwdRef, snap => {
+          fwdData = snap.val() || {};
+          fwdDone = true;
+          syncTwoWay();
+        });
+
+        unsubRet = onValue(retRef, snap => {
+          retData = snap.val() || {};
+          retDone = true;
+          syncTwoWay();
+        });
       }
     };
 
-    function buildDeckLayout(deckPrefix, containerId) {
-      const container = document.getElementById(containerId);
-      container.innerHTML = '';
-      let seatNum = 1;
+    /* ------ CUSTOM DECK LAYOUTS ------ */
+    const lowerDeckLayout = [
+      ['L1', null, 'L12', 'L18'],
+      ['L2', 'L7', 'L13', 'L19'],
+      ['L3', 'L8', 'L14', 'L20'],
+      ['L4', 'L9', 'L15', 'L21'],
+      ['L5', 'L10', 'L16', 'L22'],
+      ['L6', 'L11', 'L17', 'L23']
+    ];
 
-      for (let row = 1; row <= 7; row++) {
-        const rowDiv = document.createElement('div');
-        rowDiv.className = 'flex justify-between items-center gap-4';
-        
-        const leftSeat = `${deckPrefix}${seatNum++}`;
-        const aisle = document.createElement('div');
-        aisle.className = 'w-8';
-        
-        const rightGroup = document.createElement('div');
-        rightGroup.className = 'flex gap-2';
-
-        if (seatNum <= 22) rightGroup.appendChild(createSeatHTML(`${deckPrefix}${seatNum++}`));
-        if (seatNum <= 22) rightGroup.appendChild(createSeatHTML(`${deckPrefix}${seatNum++}`));
-
-        rowDiv.appendChild(createSeatHTML(leftSeat));
-        rowDiv.appendChild(aisle);
-        rowDiv.appendChild(rightGroup);
-        container.appendChild(rowDiv);
-      }
-    }
+    const upperDeckLayout = [
+      ['U1', null, 'U12', 'U13'],
+      ['U2', 'U7', 'U14', 'U15'],
+      ['U3', 'U8', 'U16', 'U17'],
+      ['U4', 'U9', 'U18', 'U19'],
+      ['U5', 'U10', 'U20', 'U21'],
+      ['U6', 'U11', 'U22', 'U23']
+    ];
 
     function createSeatHTML(seatCode) {
       const seat = document.createElement('div');
@@ -410,6 +419,53 @@
       seat.innerHTML = `<div class="sleeper-pillow"></div><span>${seatCode}</span>`;
       return seat;
     }
+
+    function createEmptySpace() {
+      const empty = document.createElement('div');
+      empty.style.width = '55px';
+      empty.style.height = '95px';
+      return empty;
+    }
+
+    function buildCustomDeck(layout, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      
+      layout.forEach(rowArr => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'flex justify-between items-center gap-4';
+        
+        // Left Side (Conductor Side)
+        const leftGroup = document.createElement('div');
+        leftGroup.className = 'flex gap-2';
+        
+        if (rowArr[0]) leftGroup.appendChild(createSeatHTML(rowArr[0]));
+        else leftGroup.appendChild(createEmptySpace());
+        
+        if (rowArr[1]) leftGroup.appendChild(createSeatHTML(rowArr[1]));
+        else leftGroup.appendChild(createEmptySpace());
+        
+        // Aisle Space
+        const aisle = document.createElement('div');
+        aisle.className = 'w-8';
+        
+        // Right Side (Driver Side)
+        const rightGroup = document.createElement('div');
+        rightGroup.className = 'flex gap-2';
+        
+        if (rowArr[2]) rightGroup.appendChild(createSeatHTML(rowArr[2]));
+        else rightGroup.appendChild(createEmptySpace());
+        
+        if (rowArr[3]) rightGroup.appendChild(createSeatHTML(rowArr[3]));
+        else rightGroup.appendChild(createEmptySpace());
+        
+        rowDiv.appendChild(leftGroup);
+        rowDiv.appendChild(aisle);
+        rowDiv.appendChild(rightGroup);
+        container.appendChild(rowDiv);
+      });
+    }
+    /* ---------------------------------- */
 
     window.switchDeck = function(deck) {
       document.getElementById('lower-deck-grid').classList.toggle('hidden', deck !== 'lower');
@@ -570,13 +626,9 @@
       };
 
       try {
-        // Save Main Booking Record
         await set(ref(db, `bookings/${bookingId}`), bookingData);
-        
-        // Update Seats Availability multi-path
         await update(ref(db), seatUpdates);
 
-        // Show Success Modal
         document.getElementById('ticket-id').innerText = bookingId;
         document.getElementById('ticket-type').innerText = tripDisplay;
         document.getElementById('ticket-date').innerText = type === 'twoway' ? `${selectedDate} to ${retDate}` : selectedDate;
@@ -591,7 +643,7 @@
         updateBookingUI();
       } catch (error) {
         console.error("Booking failed:", error);
-        alert("Booking error! Please check your connection.");
+        alert("Booking error! Please try again.");
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = `<i class="fa-solid fa-hand-holding-dollar"></i> Book Now (Pay on Bus)`;
@@ -600,8 +652,9 @@
 
     window.closeModal = () => document.getElementById('ticket-modal').classList.add('hidden');
 
-    buildDeckLayout('L', 'lower-deck-grid');
-    buildDeckLayout('U', 'upper-deck-grid');
+    // Building Deck Layouts using custom layouts
+    buildCustomDeck(lowerDeckLayout, 'lower-deck-grid');
+    buildCustomDeck(upperDeckLayout, 'upper-deck-grid');
     initDateStrip();
   </script>
 </body>
