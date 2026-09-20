@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Venkateswara holidays | Luxury Sleeper Bus Booking</title>
+  <title>Vaishno Devi Express | Luxury Sleeper Bus Booking</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
@@ -48,7 +48,7 @@
         </div>
         <div>
           <h1 class="text-2xl md:text-3xl font-extrabold tracking-wide text-white drop-shadow-md">
-            Venkateswara holidays
+            MAA VAISHNO EXPRESS
           </h1>
           <p class="text-xs text-amber-200 font-medium">Premium AC Multi-Axle Sleeper</p>
         </div>
@@ -236,7 +236,6 @@
     let currentSeatsData = {};
     
     let unsubFwd = null;
-    let unsubRet = null;
 
     let ticketPrices = {
       oneWay: 1299,
@@ -258,7 +257,6 @@
 
     function stopPreviousListeners() {
       if (unsubFwd) { unsubFwd(); unsubFwd = null; }
-      if (unsubRet) { unsubRet(); unsubRet = null; }
     }
 
     window.changeJourneyType = function() {
@@ -336,60 +334,49 @@
       }
     }
 
+    // --- NEW FETCH SEATS LOGIC --- 
+    // Reads directly from 'bookings' database to handle cancellations automatically
     window.fetchSeats = function() {
       if (!selectedDate) return;
       stopPreviousListeners();
       currentSeatsData = {};
 
       const type = document.querySelector('input[name="journey_type"]:checked').value;
+      const retDate = document.getElementById('return-date-input').value;
 
-      if (type === 'forward') {
-        const fwdRef = ref(db, `bus_seats/${selectedDate}/H_to_K`);
-        unsubFwd = onValue(fwdRef, snap => {
-          currentSeatsData = snap.val() || {};
-          renderSeatsStatus();
-        });
-      } else if (type === 'return') {
-        const retRef = ref(db, `bus_seats/${selectedDate}/K_to_H`);
-        unsubRet = onValue(retRef, snap => {
-          currentSeatsData = snap.val() || {};
-          renderSeatsStatus();
-        });
-      } else if (type === 'twoway') {
-        const retDate = document.getElementById('return-date-input').value;
-        if(!retDate) return;
-
-        let fwdData = {}, retData = {};
-        let fwdDone = false, retDone = false;
-
-        const syncTwoWay = () => {
-          if(fwdDone && retDone) {
-            currentSeatsData = {};
-            const allKeys = new Set([...Object.keys(fwdData), ...Object.keys(retData)]);
-            allKeys.forEach(seatKey => {
-              if (fwdData[seatKey]?.status === 'booked' || retData[seatKey]?.status === 'booked') {
-                currentSeatsData[seatKey] = { status: 'booked' };
-              }
-            });
-            renderSeatsStatus();
+      const bookingsRef = ref(db, 'bookings');
+      
+      unsubFwd = onValue(bookingsRef, (snapshot) => {
+        currentSeatsData = {};
+        const allBookings = snapshot.val() || {};
+        
+        Object.values(allBookings).forEach(booking => {
+          // IMPORTANT: If booking is Cancelled from Admin panel, it ignores it (so seats are available again)
+          if (booking.status === 'Cancelled') return;
+          if (!booking.seats) return;
+          
+          const seatsArr = booking.seats.split(',').map(s => s.trim());
+          
+          // Check if this booking blocks the currently selected Forward trip
+          if (type === 'forward' || type === 'twoway') {
+            if ((booking.type === 'forward' || booking.type === 'twoway') && booking.date === selectedDate) {
+              seatsArr.forEach(seat => currentSeatsData[seat] = { status: 'booked' });
+            }
           }
-        };
-
-        const fwdRef = ref(db, `bus_seats/${selectedDate}/H_to_K`);
-        const retRef = ref(db, `bus_seats/${retDate}/K_to_H`);
-
-        unsubFwd = onValue(fwdRef, snap => {
-          fwdData = snap.val() || {};
-          fwdDone = true;
-          syncTwoWay();
+          
+          // Check if this booking blocks the currently selected Return trip
+          if (type === 'return' || type === 'twoway') {
+            let targetDate = (type === 'twoway') ? retDate : selectedDate;
+            let bookingRetDate = (booking.type === 'twoway') ? booking.returnDate : booking.date;
+            
+            if ((booking.type === 'return' || booking.type === 'twoway') && bookingRetDate === targetDate) {
+              seatsArr.forEach(seat => currentSeatsData[seat] = { status: 'booked' });
+            }
+          }
         });
-
-        unsubRet = onValue(retRef, snap => {
-          retData = snap.val() || {};
-          retDone = true;
-          syncTwoWay();
-        });
-      }
+        
+        renderSeatsStatus();
+      });
     };
 
     /* ------ CUSTOM DECK LAYOUTS ------ */
@@ -577,7 +564,6 @@
       let activePrice = (type === 'twoway') ? ticketPrices.twoWay : (type === 'return' ? ticketPrices.returnWay : ticketPrices.oneWay);
       const totalAmount = selectedSeats.length * activePrice;
 
-      const seatUpdates = {};
       const passengers = [];
 
       selectedSeats.forEach(seatCode => {
@@ -588,18 +574,6 @@
           gender: document.getElementById(`p-gender-${seatCode}`).value
         };
         passengers.push(pData);
-
-        let seatStatusObj = { status: 'booked', bookedBy: custName, gender: pData.gender };
-
-        if (type === 'forward' || type === 'twoway') {
-          seatUpdates[`bus_seats/${selectedDate}/H_to_K/${seatCode}`] = seatStatusObj;
-        }
-        if (type === 'return') {
-          seatUpdates[`bus_seats/${selectedDate}/K_to_H/${seatCode}`] = seatStatusObj;
-        }
-        if (type === 'twoway') {
-          seatUpdates[`bus_seats/${retDate}/K_to_H/${seatCode}`] = seatStatusObj;
-        }
       });
 
       const bookingId = 'BK' + Date.now().toString().slice(-6);
@@ -626,8 +600,8 @@
       };
 
       try {
+        // Now only writing to bookings node (Single source of truth)
         await set(ref(db, `bookings/${bookingId}`), bookingData);
-        await update(ref(db), seatUpdates);
 
         document.getElementById('ticket-id').innerText = bookingId;
         document.getElementById('ticket-type').innerText = tripDisplay;
