@@ -353,7 +353,7 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
     "key": "rzp_live_TqU6CUW4npqhVg",
     "amount": totalAmount * 100,
     "currency": "INR",
-    "name": "Maa Vaishno Express",
+    "name": "Venkateswara Holidays",
     "description": `Bus Booking for Seats: ${selectedSeats.join(', ')}`,
     "handler": async function (response) {
       submitBtn.disabled = true;
